@@ -13,7 +13,7 @@
       function pasteImage() {
         if (navigator.clipboard) {
           navigator.clipboard.read().then(function (data) {
-            for (var i = 0; i < data.items.length; i++) {
+            for (var i = 0; i < data.length; i++) {
               var item = data.items[i];
               if (item.type.indexOf("image") !== -1) {
                 var blob = item.getAsFile();
