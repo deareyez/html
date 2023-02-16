@@ -11,7 +11,7 @@
     <div id="image-container"></div>
     <script>
       function pasteImage() {
-        navigator.clipboard.read().then(function(data) {
+        navigator.clipboard.read().then(async function(data) {
           for (var i = 0; i < data.length; i++) {
             const item = data[i];
             const clipType = item.types[0];
