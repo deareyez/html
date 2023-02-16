@@ -1,26 +1,29 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <title>clipboard test example  !!</title>
-    <style>
-      div {
-        margin-bottom: 10px;
-      }
-    </style>
+    <title>클립보드 이미지 붙여넣기</title>
   </head>
   <body>
-      <form>
-       <div>
-         <label for="text">clipboard v1.0</label>
-         <input type="text" id="text" Placeholder="input text">
-         
-       </div>
-       <div>
-         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1920px-Android_robot.svg.png">
-       </div>
-      </form>
-     <script>
-       //var test = document.querySelector('input');
-     </script>
+    <h1>클립보드 이미지 붙여넣기</h1>
+    <p>이미지를 붙여넣으려면 Ctrl+V 를 누르세요.</p>
+    <div id="image-container"></div>
+    <script>
+      document.addEventListener("paste", function(event) {
+        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        for (index in items) {
+          var item = items[index];
+          if (item.kind === 'file') {
+            var blob = item.getAsFile();
+            var reader = new FileReader();
+            reader.onload = function(event){
+              var img = new Image();
+              img.src = event.target.result;
+              document.getElementById("image-container").appendChild(img);
+            };
+            reader.readAsDataURL(blob);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
