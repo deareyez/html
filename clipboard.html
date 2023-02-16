@@ -17,7 +17,7 @@
               var item = data[i];
               var type = item.types[0];
               if (type.indexOf("image") !== -1) {
-                var blob = await item.getType(type);
+                var blob = item.getType(type);
                 var url = URL.createObjectURL(blob);
                 var img = new Image();
                 img.src = url;
