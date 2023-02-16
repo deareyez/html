@@ -14,7 +14,7 @@
         if (navigator.clipboard) {
           navigator.clipboard.read().then(function (data) {
             for (var i = 0; i < data.length; i++) {
-              var item = data.items[i];
+              var item = data[i];
               if (item.type.indexOf("image") !== -1) {
                 var blob = item.getAsFile();
                 var url = URL.createObjectURL(blob);
@@ -26,18 +26,6 @@
           });
         } else {
           document.getElementById("image-input").click();
-        }
-      }
-      function handleImageInput(input) {
-        var files = input.files;
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          if (file.type.indexOf("image") !== -1) {
-            var url = URL.createObjectURL(file);
-            var img = new Image();
-            img.src = url;
-            document.getElementById("image-container").appendChild(img);
-          }
         }
       }
     </script>
