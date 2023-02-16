@@ -13,8 +13,8 @@
       function pasteImage() {
         navigator.clipboard.read().then(function(data) {
           for (var i = 0; i < data.length; i++) {
-            var item = data[i];
-            var clipType = item.types[0];
+            const item = data[i];
+            const clipType = item.types[0];
             if (item.type.indexOf("image") !== -1) {
               const blob = await item.getType(clipType);
               var url = URL.createObjectURL(blob);
