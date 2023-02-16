@@ -10,7 +10,7 @@
     <div id="image-container"></div>
     <input type="file" accept="image/*" id="image-input" style="display: none;">
     <script>
-      function pasteImage() {
+      async function pasteImage() {
         if (navigator.clipboard) {
           navigator.clipboard.read().then(function (data) {
             for (var i = 0; i < data.length; i++) {
