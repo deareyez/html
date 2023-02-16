@@ -15,7 +15,7 @@
           navigator.clipboard.read().then(function (data) {
             for (var i = 0; i < data.length; i++) {
               var item = data[i];
-              if (item.types.indexOf("image") !== -1) {
+              if (item.types[0].indexOf("image") !== -1) {
                 var blob = item.getAsFile();
                 var url = URL.createObjectURL(blob);
                 var img = new Image();
