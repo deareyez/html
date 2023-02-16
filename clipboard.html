@@ -15,7 +15,7 @@
           for (var i = 0; i < data.length; i++) {
             const item = data[i];
             const clipType = item.types[0];
-            if (item.type.indexOf("image") !== -1) {
+            if (clipType.indexOf("image") !== -1) {
               const blob = await item.getType(clipType);
               var url = URL.createObjectURL(blob);
               var img = new Image();
