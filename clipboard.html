@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>클립보드 이미지 붙여넣기</title>
+    <title>모바일 클립보드 이미지 붙여넣기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>클립보드 이미지 붙여넣기</h1>
-    <p>이미지를 붙여넣으려면 Ctrl+V 를 누르세요.</p>
+    <h1>모바일 클립보드 이미지 붙여넣기</h1>
+    <p>이미지를 붙여넣으려면 화면을 누르고 붙여넣기 버튼을 누르세요.</p>
     <div id="image-container"></div>
     <script>
-      document.addEventListener("paste", function(event) {
-        var items = (event.clipboardData || event.originalEvent.clipboardData).items;
-        for (index in items) {
-          var item = items[index];
-          if (item.kind === 'file') {
-            var blob = item.getAsFile();
-            var reader = new FileReader();
-            reader.onload = function(event){
+      function pasteImage() {
+        navigator.clipboard.read().then(function (data) {
+          for (var i = 0; i < data.items.length; i++) {
+            var item = data.items[i];
+            if (item.type.indexOf("image") !== -1) {
+              var blob = item.getAsFile();
+              var url = URL.createObjectURL(blob);
               var img = new Image();
-              img.src = event.target.result;
+              img.src = url;
               document.getElementById("image-container").appendChild(img);
-            };
-            reader.readAsDataURL(blob);
+            }
           }
-        }
-      });
+        });
+      }
     </script>
+    <button onclick="pasteImage()">붙여넣기</button>
   </body>
 </html>
