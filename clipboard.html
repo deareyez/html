@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>모바일 이미지 붙여넣기</title>
+    <title>모바일 클립보드 이미지 붙여넣기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <h1>모바일 이미지 붙여넣기</h1>
+    <h1>모바일 클립보드 이미지 붙여넣기</h1>
     <p>이미지를 붙여넣으려면 화면을 누르고 붙여넣기 버튼을 누르세요.</p>
+    <canvas id="image-canvas" style="display: none;"></canvas>
     <div id="image-container"></div>
-    <input type="file" accept="image/*" id="image-input" style="display: none;">
     <script>
-      function handleImageInput(input) {
-        var files = input.files;
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          if (file.type.indexOf("image") !== -1) {
-            var url = URL.createObjectURL(file);
-            var img = new Image();
-            img.src = url;
-            document.getElementById("image-container").appendChild(img);
+      function pasteImage() {
+        navigator.clipboard.read().then(function(data) {
+          for (var i = 0; i < data.items.length; i++) {
+            var item = data.items[i];
+            if (item.type.indexOf("image") !== -1) {
+              var blob = item.getAsFile();
+              var url = URL.createObjectURL(blob);
+              var img = new Image();
+              img.src = url;
+              img.onload = function() {
+                var canvas = document.getElementById("image-canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                var imageData = canvas.toDataURL();
+                var image = new Image();
+                image.src = imageData;
+                document.getElementById("image-container").appendChild(image);
+              };
+            }
           }
-        }
+        });
       }
     </script>
-    <button onclick="document.getElementById('image-input').click()">붙여넣기</button>
+    <button onclick="pasteImage()">붙여넣기</button>
   </body>
 </html>
