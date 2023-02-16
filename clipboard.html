@@ -14,7 +14,7 @@
         if (navigator.clipboard) {
           navigator.clipboard.read().then(function (data) {
             for (var i = 0; i < data.length; i++) {
-              var item = data[i];
+              const item = data[i];
               var type = item.types[0];
               if (type.indexOf("image") !== -1) {
                 const blob = await item.getType(type);
