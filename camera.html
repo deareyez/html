@@ -12,14 +12,22 @@
       <form>
        <div>
          <label for="file">Choose file to upload v1.0</label>
-         <input type="file" accept="image/*" capture="camera">
+         
+         <input type="file" accept="image/*" id="fileInput" capture="camera">
        </div>
        <div>
          <button>Submit</button>
        </div>
       </form>
      <script>
-       //var test = document.querySelector('input');
+       document.getElementById('fileInput').addEventListener('change', function(event) {
+          var fileList = event.target.files; // 이것은 FileList 객체입니다.
+          
+          // 파일 리스트를 순회하면서 이름을 출력합니다.
+          for(var i = 0; i < fileList.length; i++) {
+            console.log('파일 이름:', fileList[i].name);
+          }
+        });
      </script>
   </body>
 </html>
