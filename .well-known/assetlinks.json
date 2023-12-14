@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.baecom.rallyz.test",
+      "sha256_cert_fingerprints": [
+        "5B:5D:E2:8B:CE:A6:F2:7B:70:85:6A:49:FE:C4:2E:46:94:14:86:F7:BD:0D:10:91:6F:05:D5:D5:6C:4D:84:46"
+      ]
+    }
+  }
+]
