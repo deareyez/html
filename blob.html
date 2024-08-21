@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일을 Blob으로 변환하기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #imagePreview {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 파일을 선택하여 Blob으로 변환하기</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    
+    <!-- 이미지 미리보기를 위한 요소 -->
+    <div id="previewContainer">
+        <img id="imagePreview" alt="이미지 미리보기" style="display:none;">
+    </div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // 선택된 첫 번째 파일
+
+            if (file) {
+                // 파일을 Blob으로 변환
+                const blob = new Blob([file], { type: file.type });
+
+                // Blob의 정보 출력 (디버그용)
+                console.log('Blob:', blob);
+
+                // Blob을 URL로 변환하여 이미지 미리보기
+                const imageUrl = URL.createObjectURL(blob);
+                const img = document.getElementById('imagePreview');
+                img.src = imageUrl;
+                img.style.display = 'block';
+            } else {
+                console.log('파일이 선택되지 않았습니다.');
+            }
+        });
+    </script>
+</body>
+</html>
