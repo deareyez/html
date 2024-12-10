@@ -3,67 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파일을 Blob으로 변환하기</title>
+    <title>Blob 처리 예제</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        #imagePreview, #reconstructedImage {
+        #imagePreview, #restoredImage {
             margin-top: 20px;
             max-width: 100%;
             height: auto;
         }
-        #blobData {
+        #blobData, #blobInput {
             width: 100%;
-            height: 200px;
-            margin-top: 20px;
+            height: 150px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>이미지 파일을 선택하여 Blob으로 변환하기</h1>
-    <input type="file" id="fileInput" accept="image/*">
-    
-    <!-- 이미지 미리보기를 위한 요소 -->
-    <div id="previewContainer">
-        <h3>원본 이미지 미리보기</h3>
+    <h1>Blob 처리: 이미지 변환 및 복원</h1>
+
+    <!-- 1. 이미지를 Blob으로 변환 -->
+    <section>
+        <h2>1. 이미지를 Blob으로 변환</h2>
+        <input type="file" id="fileInput" accept="image/*">
+        <h3>미리보기</h3>
         <img id="imagePreview" alt="이미지 미리보기" style="display:none;">
-    </div>
+        <textarea id="blobData" readonly placeholder="Blob 데이터가 여기에 표시됩니다."></textarea>
+    </section>
 
-    <!-- Blob 데이터를 보여주는 텍스트 영역 -->
-    <textarea id="blobData" readonly placeholder="Blob 데이터가 여기에 표시됩니다."></textarea>
-    
-    <!-- Blob으로부터 이미지를 재구성하기 위한 버튼 -->
-    <button id="reconstructImageBtn" style="margin-top: 20px;">Blob에서 이미지 재구성</button>
+    <hr>
 
-    <!-- 재구성된 이미지를 표시 -->
-    <div id="reconstructedContainer">
-        <h3>재구성된 이미지</h3>
-        <img id="reconstructedImage" alt="재구성된 이미지" style="display:none;">
-    </div>
+    <!-- 2. Blob 문자열을 이미지로 복원 -->
+    <section>
+        <h2>2. Blob 문자열을 이미지로 복원</h2>
+        <textarea id="blobInput" placeholder="여기에 Blob 문자열(Base64)을 입력하세요."></textarea>
+        <button id="restoreImageBtn">Blob 문자열로 이미지 복원</button>
+        <h3>복원된 이미지</h3>
+        <img id="restoredImage" alt="복원된 이미지" style="display:none;">
+    </section>
 
     <script>
-        let blobData; // 전역 변수로 Blob 데이터 저장
-
+        // 1. 이미지를 Blob으로 변환
         document.getElementById('fileInput').addEventListener('change', function(event) {
             const file = event.target.files[0]; // 선택된 첫 번째 파일
 
             if (file) {
-                // 파일을 Blob으로 변환
+                // Blob 생성
                 const blob = new Blob([file], { type: file.type });
-                blobData = blob; // Blob 데이터를 전역 변수에 저장
 
-                // Blob의 정보 출력 (디버그용)
-                console.log('Blob:', blob);
-
-                // Blob을 URL로 변환하여 이미지 미리보기
+                // Blob URL 생성 후 미리보기
                 const imageUrl = URL.createObjectURL(blob);
                 const img = document.getElementById('imagePreview');
                 img.src = imageUrl;
                 img.style.display = 'block';
 
-                // Blob 데이터를 Base64 문자열로 변환하여 텍스트 영역에 표시
+                // Blob 데이터를 Base64 문자열로 변환 후 텍스트 영역에 표시
                 const reader = new FileReader();
                 reader.onloadend = function() {
                     document.getElementById('blobData').textContent = reader.result;
@@ -71,21 +67,31 @@
                 reader.readAsDataURL(blob);
 
             } else {
-                console.log('파일이 선택되지 않았습니다.');
+                alert('이미지를 선택하세요!');
             }
         });
 
-        document.getElementById('reconstructImageBtn').addEventListener('click', function() {
-            if (blobData) {
-                // Blob 데이터를 URL로 변환하여 이미지로 재구성
-                const reconstructedUrl = URL.createObjectURL(blobData);
-                const reconstructedImg = document.getElementById('reconstructedImage');
-                reconstructedImg.src = reconstructedUrl;
-                reconstructedImg.style.display = 'block';
+        // 2. Blob 문자열을 이미지로 복원
+        document.getElementById('restoreImageBtn').addEventListener('click', function() {
+            const blobString = document.getElementById('blobInput').value.trim(); // Blob 문자열 가져오기
+
+            if (blobString) {
+                // Base64 문자열을 Blob으로 변환
+                const base64Data = blobString.split(',')[1]; // Base64 데이터만 추출
+                const binaryData = atob(base64Data); // Base64를 바이너리 데이터로 디코딩
+                const arrayBuffer = new Uint8Array(binaryData.length);
+
+                for (let i = 0; i < binaryData.length; i++) {
+                    arrayBuffer[i] = binaryData.charCodeAt(i);
+                }
+
+                // Blob 생성
+                const blob = new Blob([arrayBuffer], { type: 'image/png' }); // MIME 타입은 필요한 대로 변경 가능
+                const restoredUrl = URL.createObjectURL(blob);
+
+                // Blob URL을 이미지 src로 설정
+                const img = document.getElementById('restoredImage');
+                img.src = restoredUrl;
+                img.style.display = 'block';
             } else {
-                alert('Blob 데이터가 없습니다. 먼저 파일을 업로드하세요.');
-            }
-        });
-    </script>
-</body>
-</html>
+                alert('Blob
