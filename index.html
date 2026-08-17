@@ -1,0 +1,1542 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#174f45">
+  <meta name="description" content="여행과 생활에 바로 쓰는 베트남어 300개를 날짜별 10일 커리큘럼과 암기카드로 익히는 학습장">
+  <title>베트남어 생존회화 300</title>
+  <style>
+    :root {
+      --ink: #18302c;
+      --muted: #61716d;
+      --paper: #fbfaf5;
+      --surface: #ffffff;
+      --line: #dce3de;
+      --green: #174f45;
+      --green-2: #267265;
+      --green-soft: #e8f2ed;
+      --red: #c24a3b;
+      --red-soft: #f9e9e5;
+      --gold: #d5a43a;
+      --shadow: 0 14px 38px rgba(23, 79, 69, .10);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 3%, rgba(213, 164, 58, .13), transparent 25rem),
+        linear-gradient(180deg, #f5f7f2 0, var(--paper) 28rem);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    button, label { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+    .skip-link {
+      position: fixed; left: 12px; top: -100px; z-index: 1000;
+      padding: 10px 14px; color: white; background: var(--green); border-radius: 8px;
+    }
+    .skip-link:focus { top: 12px; }
+    .site-header { padding: 18px 0 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 850; letter-spacing: -.04em; }
+    .flag-dot {
+      width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 auto;
+      color: #ffe16b; background: var(--red); border-radius: 9px; font-size: 15px;
+      box-shadow: 0 5px 14px rgba(194, 74, 59, .22);
+    }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn {
+      min-height: 44px; border: 1px solid var(--line); border-radius: 12px; padding: 9px 14px;
+      background: rgba(255,255,255,.84); font-weight: 750; cursor: pointer; transition: .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: #adc2ba; box-shadow: 0 6px 16px rgba(23,79,69,.08); }
+    .btn:focus-visible, .chip:focus-visible, input:focus-visible, .learn-check:focus-within {
+      outline: 3px solid rgba(213,164,58,.52); outline-offset: 2px;
+    }
+    .btn.primary { border-color: var(--green); color: white; background: var(--green); }
+    .btn.primary:hover { background: #103f37; }
+    .btn.ghost { background: transparent; }
+    .hero {
+      display: grid; grid-template-columns: 1.45fr .75fr; gap: 34px; align-items: end;
+      padding: 62px 0 42px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px;
+      color: var(--green-2); font-size: 13px; font-weight: 850; letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 2px; background: var(--gold); }
+    h1 { margin: 0; max-width: 760px; font-size: clamp(38px, 7vw, 70px); line-height: 1.04; letter-spacing: -.065em; }
+    h1 .accent { color: var(--red); }
+    .lead { max-width: 650px; margin: 20px 0 0; color: var(--muted); font-size: clamp(16px, 2.5vw, 19px); }
+    .progress-card {
+      position: relative; overflow: hidden; padding: 24px; color: white;
+      background: var(--green); border-radius: 26px; box-shadow: var(--shadow);
+    }
+    .progress-card::after {
+      content: ""; position: absolute; width: 150px; height: 150px; right: -55px; top: -70px;
+      border: 28px solid rgba(255,255,255,.07); border-radius: 50%;
+    }
+    .progress-label { margin: 0 0 4px; color: rgba(255,255,255,.73); font-size: 13px; font-weight: 800; }
+    .progress-number { display: flex; align-items: baseline; gap: 7px; }
+    .progress-number strong { font-size: 42px; line-height: 1.15; letter-spacing: -.05em; }
+    .progress-number span { color: rgba(255,255,255,.74); }
+    .bar { height: 9px; margin-top: 18px; overflow: hidden; background: rgba(255,255,255,.15); border-radius: 999px; }
+    .bar > span { display: block; width: 0; height: 100%; background: #f3cd69; border-radius: inherit; transition: width .35s ease; }
+    .progress-foot { display: flex; justify-content: space-between; margin-top: 10px; color: rgba(255,255,255,.74); font-size: 12px; }
+    .toolbar-shell {
+      position: sticky; top: 0; z-index: 20; padding: 10px 0;
+      background: rgba(251,250,245,.88); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(220,227,222,.75);
+    }
+    .view-switch {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px;
+      width: min(410px, 100%); margin: 0 auto; padding: 4px;
+      background: #e9eeea; border: 1px solid #d7e0da; border-radius: 14px;
+    }
+    .view-tab {
+      min-height: 42px; padding: 8px 14px; border: 0; border-radius: 10px;
+      color: var(--muted); background: transparent; font-weight: 820; cursor: pointer;
+    }
+    .view-tab[aria-selected="true"] {
+      color: var(--green); background: white; box-shadow: 0 4px 12px rgba(23,79,69,.09);
+    }
+    .view-tab:focus-visible { outline: 3px solid rgba(213,164,58,.52); outline-offset: 2px; }
+    .word-tools { margin-top: 10px; }
+    .toolbar { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; }
+    .search-wrap { position: relative; }
+    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 18px; }
+    #search {
+      width: 100%; height: 50px; padding: 0 44px 0 46px; color: var(--ink);
+      background: var(--surface); border: 1px solid var(--line); border-radius: 15px;
+      box-shadow: 0 4px 14px rgba(23,79,69,.04);
+    }
+    #search::placeholder { color: #8c9995; }
+    #wordsPanel { scroll-margin-top: 170px; }
+    .clear-search {
+      position: absolute; right: 8px; top: 7px; width: 36px; height: 36px; border: 0;
+      border-radius: 50%; color: var(--muted); background: transparent; cursor: pointer;
+    }
+    .clear-search:hover { background: var(--green-soft); }
+    .category-strip { display: flex; gap: 8px; padding: 14px 0 2px; overflow-x: auto; scrollbar-width: thin; }
+    .chip {
+      flex: 0 0 auto; min-height: 38px; padding: 7px 13px; border: 1px solid var(--line);
+      border-radius: 999px; background: var(--surface); color: var(--muted); font-weight: 720; cursor: pointer;
+    }
+    .chip[aria-pressed="true"] { color: white; background: var(--green); border-color: var(--green); }
+    main { padding: 30px 0 68px; }
+    [hidden] { display: none !important; }
+
+    .curriculum-head {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .58fr); gap: 18px;
+      align-items: stretch; margin-bottom: 30px;
+    }
+    .curriculum-intro, .date-card {
+      padding: 25px; background: rgba(255,255,255,.94); border: 1px solid var(--line);
+      border-radius: var(--radius); box-shadow: 0 7px 25px rgba(23,79,69,.055);
+    }
+    .curriculum-intro { position: relative; overflow: hidden; }
+    .curriculum-intro::after {
+      content: "10"; position: absolute; right: 18px; bottom: -28px; z-index: 0;
+      color: rgba(23,79,69,.055); font-size: 120px; font-weight: 950; line-height: 1;
+    }
+    .curriculum-intro > * { position: relative; z-index: 1; }
+    .section-kicker {
+      margin: 0 0 6px; color: var(--green-2); font-size: 12px; font-weight: 850;
+      letter-spacing: .08em; text-transform: uppercase;
+    }
+    .curriculum-intro h2 { margin: 0; font-size: clamp(27px, 4vw, 36px); letter-spacing: -.05em; }
+    .curriculum-copy { max-width: 660px; margin: 9px 0 18px; color: var(--muted); }
+    .schedule-summary {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 0;
+      color: #40534e; font-size: 14px; font-weight: 720;
+    }
+    .schedule-summary strong { color: var(--red); }
+    .summary-dot { width: 4px; height: 4px; background: #a8b5b0; border-radius: 50%; }
+    .date-card { display: flex; flex-direction: column; justify-content: center; }
+    .date-card label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 820; }
+    .date-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+    #startDate {
+      width: 100%; min-height: 46px; padding: 9px 12px; color: var(--ink); background: var(--paper);
+      border: 1px solid var(--line); border-radius: 12px; font-weight: 720;
+    }
+    .date-help { margin: 9px 0 0; color: var(--muted); font-size: 12px; }
+    .phase + .phase { margin-top: 38px; }
+    .phase-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .phase-head h3 { margin: 0; font-size: 22px; letter-spacing: -.035em; }
+    .phase-head p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+    .phase-count { flex: 0 0 auto; color: var(--green-2); font-size: 12px; font-weight: 800; }
+    .day-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .day-card {
+      position: relative; min-width: 0; padding: 18px; background: rgba(255,255,255,.94);
+      border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 4px 18px rgba(23,79,69,.04);
+    }
+    .day-card.today {
+      border-color: var(--gold); background: linear-gradient(145deg, #fffdf4, #fff);
+      box-shadow: 0 11px 30px rgba(213,164,58,.15);
+    }
+    .day-card.today::before {
+      content: ""; position: absolute; inset: 8px auto 8px 0; width: 4px;
+      background: var(--gold); border-radius: 0 999px 999px 0;
+    }
+    .day-card.completed { background: #f3f7f4; }
+    .day-card.upcoming { background: rgba(255,255,255,.72); }
+    .day-card.overdue { border-color: #e4c5bd; }
+    .day-top { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+    .day-label { color: var(--green); font-size: 13px; font-weight: 900; letter-spacing: .02em; }
+    .day-date { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .day-status {
+      flex: 0 0 auto; padding: 4px 9px; border-radius: 999px; color: var(--muted);
+      background: #edf1ee; font-size: 11px; font-weight: 850;
+    }
+    .today .day-status { color: #755613; background: #fff0bf; }
+    .completed .day-status { color: var(--green); background: #dfeee7; }
+    .overdue .day-status { color: #9d493c; background: var(--red-soft); }
+    .day-card h4 { margin: 13px 0 4px; font-size: 18px; letter-spacing: -.025em; }
+    .day-task { min-height: 43px; margin: 0; color: var(--muted); font-size: 13px; }
+    .day-progress { margin-top: 14px; }
+    .day-progress-head { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }
+    .day-progress-head strong { color: var(--ink); font-size: 12px; }
+    .mini-bar { height: 6px; margin-top: 7px; overflow: hidden; background: #e5ebe7; border-radius: 999px; }
+    .mini-bar span { display: block; height: 100%; background: var(--green-2); border-radius: inherit; }
+    .review-due {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 13px; min-height: 25px;
+    }
+    .review-label { margin-right: 2px; color: #7b8985; font-size: 10px; font-weight: 850; }
+    .review-chip {
+      padding: 3px 6px; color: #61716d; background: #f2f4f1; border: 1px solid #e2e7e3;
+      border-radius: 6px; font-size: 10px; white-space: nowrap;
+    }
+    .review-empty { color: #95a09d; font-size: 10px; }
+    .day-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
+    .day-actions .btn { flex: 1 1 118px; min-height: 40px; padding: 7px 10px; font-size: 12px; }
+    .day-actions .btn.primary { flex-grow: 1.12; }
+    .scope-banner {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 16px; padding: 11px 13px; color: var(--green); background: var(--green-soft);
+      border: 1px solid #c9ddd5; border-radius: 13px; font-size: 13px; font-weight: 750;
+    }
+    .scope-banner .btn { flex: 0 0 auto; min-height: 36px; padding: 6px 10px; background: white; font-size: 11px; }
+    .list-head { display: flex; justify-content: space-between; align-items: end; gap: 18px; margin-bottom: 18px; }
+    .list-head h2 { margin: 0; font-size: 25px; letter-spacing: -.04em; }
+    .result-count { margin: 3px 0 0; color: var(--muted); font-size: 14px; }
+    .legend { color: var(--muted); font-size: 13px; text-align: right; }
+    .word-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .word-card {
+      display: grid; grid-template-columns: 46px minmax(0,1.25fr) minmax(0,1fr) 42px;
+      align-items: center; gap: 12px; min-height: 96px; padding: 16px;
+      background: rgba(255,255,255,.94); border: 1px solid var(--line); border-radius: 17px;
+      box-shadow: 0 4px 18px rgba(23,79,69,.045); transition: .2s ease;
+    }
+    .word-card:hover { border-color: #b8cbc4; box-shadow: 0 10px 26px rgba(23,79,69,.08); }
+    .word-card.learned { background: #f2f7f3; }
+    .word-card.learned .vietnamese { text-decoration: line-through; text-decoration-color: rgba(23,79,69,.3); }
+    .num { color: #87938f; font-size: 12px; font-weight: 780; font-variant-numeric: tabular-nums; }
+    .vietnamese { display: block; font-size: 19px; font-weight: 850; line-height: 1.28; letter-spacing: -.01em; }
+    .pronunciation { display: block; margin-top: 4px; color: var(--green-2); font-size: 13px; }
+    .meaning { color: #3d504b; font-size: 14px; }
+    .learn-check {
+      display: grid; place-items: center; width: 44px; height: 44px; justify-self: end;
+      border: 1px solid var(--line); border-radius: 12px; background: var(--paper); cursor: pointer;
+    }
+    .learn-check:hover { border-color: var(--green-2); }
+    .learn-check input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .checkmark {
+      width: 20px; height: 20px; display: grid; place-items: center; border: 2px solid #9aaba6;
+      border-radius: 7px; color: white; font-size: 13px; font-weight: 900;
+    }
+    .learn-check input:checked + .checkmark { border-color: var(--green); background: var(--green); }
+    .learn-check input:checked + .checkmark::after { content: "✓"; }
+    .empty {
+      grid-column: 1 / -1; padding: 70px 20px; text-align: center; color: var(--muted);
+      border: 1px dashed #bdcac5; border-radius: var(--radius);
+    }
+    .empty strong { display: block; margin-bottom: 5px; color: var(--ink); font-size: 18px; }
+    .guide { margin-top: 54px; }
+    .guide > h2 { margin: 0 0 18px; font-size: 25px; letter-spacing: -.04em; }
+    .guide-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
+    .plan-card { grid-column: 1 / -1; }
+    details { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; }
+    summary { padding: 18px 20px; font-weight: 820; cursor: pointer; }
+    .details-body { padding: 0 20px 20px; color: var(--muted); }
+    .patterns { margin: 0; padding-left: 23px; }
+    .patterns li + li { margin-top: 8px; }
+    .patterns code { color: var(--green); background: var(--green-soft); border-radius: 5px; padding: 1px 5px; font-family: inherit; font-weight: 750; }
+    .routine { margin: 0; padding-left: 21px; }
+    .routine li + li { margin-top: 8px; }
+    .plan-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .plan-stage { padding: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 13px; }
+    .plan-stage strong { display: block; margin-bottom: 4px; color: var(--green); font-size: 13px; }
+    .plan-stage span { font-size: 13px; }
+    .notice {
+      margin-top: 16px; padding: 15px 17px; color: #745b1f; background: #fff7df;
+      border: 1px solid #edd99c; border-radius: 14px; font-size: 13px;
+    }
+    footer { padding: 0 0 42px; color: var(--muted); font-size: 13px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; border-top: 1px solid var(--line); }
+
+    .modal {
+      position: fixed; inset: 0; z-index: 100; display: none; place-items: center; padding: 18px;
+      background: rgba(15,35,31,.72); backdrop-filter: blur(9px);
+    }
+    .modal.open { display: grid; }
+    .study-panel {
+      width: min(650px, 100%); max-height: calc(100dvh - 36px); overflow: auto; padding: 18px;
+      background: #f6f7f2; border-radius: 26px; box-shadow: 0 30px 90px rgba(0,0,0,.28);
+    }
+    .study-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .study-meta { color: var(--muted); font-size: 13px; font-weight: 750; }
+    .icon-btn {
+      width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px;
+      background: white; font-size: 20px; cursor: pointer;
+    }
+    .flashcard {
+      position: relative; width: 100%; min-height: 350px; margin-top: 14px; padding: 40px 30px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: inherit; font: inherit; text-align: center; background: white; border: 1px solid var(--line); border-radius: 22px;
+      box-shadow: var(--shadow); cursor: pointer; user-select: none;
+    }
+    .flash-category {
+      position: absolute; top: 18px; left: 18px; padding: 5px 9px;
+      color: var(--green-2); background: var(--green-soft); border-radius: 999px; font-size: 11px; font-weight: 800;
+    }
+    .flash-num { position: absolute; top: 22px; right: 20px; color: #8a9692; font-size: 12px; }
+    .flash-prompt { color: var(--muted); font-size: 13px; font-weight: 760; }
+    .flash-meaning { margin-top: 8px; font-size: clamp(25px, 6vw, 38px); font-weight: 870; line-height: 1.25; letter-spacing: -.045em; }
+    .flash-answer { display: none; margin-top: 32px; padding-top: 26px; width: min(410px, 100%); border-top: 1px solid var(--line); }
+    .flashcard.revealed .flash-answer { display: block; animation: rise .2s ease; }
+    .flash-vietnamese { display: block; color: var(--red); font-size: clamp(26px, 6vw, 40px); font-weight: 900; line-height: 1.2; }
+    .flash-pron { display: block; margin-top: 8px; color: var(--green-2); font-weight: 700; }
+    .reveal-hint { margin-top: 26px; color: #8b9793; font-size: 12px; }
+    .flashcard.revealed .reveal-hint { display: none; }
+    @keyframes rise { from { opacity: 0; transform: translateY(7px); } }
+    .study-actions { display: grid; grid-template-columns: auto repeat(5, 1fr); gap: 9px; margin-top: 12px; }
+    .study-actions .btn { min-height: 48px; }
+    .btn.shuffle[aria-pressed="true"] { color: var(--green); background: var(--green-soft); border-color: #a9c8bd; }
+    .study-help { margin: 10px 3px 0; color: #788681; font-size: 11px; text-align: center; }
+    .flash-answer-meaning { display: none; margin-top: 10px; color: #41534e; font-size: 16px; font-weight: 760; }
+    .flashcard.listening .flash-answer-meaning { display: block; }
+    body.modal-open { overflow: hidden; }
+    .sr-only {
+      position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important;
+      margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important;
+    }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 22px, 660px); }
+      .site-header { padding-top: 12px; }
+      .brand span:last-child { font-size: 14px; }
+      .nav-actions .btn.ghost { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 26px; padding: 42px 0 30px; }
+      .progress-card { padding: 20px; }
+      .curriculum-head { grid-template-columns: 1fr; }
+      .day-grid { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr auto; }
+      #studyButton span { display: none; }
+      .word-grid { grid-template-columns: 1fr; }
+      .word-card { grid-template-columns: 40px minmax(0,1.25fr) minmax(0,1fr) 40px; min-height: 88px; padding: 13px; gap: 8px; }
+      .vietnamese { font-size: 17px; }
+      .meaning { font-size: 13px; }
+      .guide-grid { grid-template-columns: 1fr; }
+      .plan-card { grid-column: auto; }
+      .plan-stages { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 5px; }
+    }
+    @media (max-width: 440px) {
+      .word-card { grid-template-columns: 34px minmax(0,1fr) 38px; }
+      .meaning { grid-column: 2; margin-top: -3px; }
+      .learn-check { grid-column: 3; grid-row: 1 / span 2; }
+      .toolbar-shell { padding-top: 7px; }
+      .view-tab { padding-inline: 8px; font-size: 13px; }
+      .curriculum-intro, .date-card { padding: 19px; }
+      .date-row { grid-template-columns: 1fr; }
+      .date-row .btn { width: 100%; }
+      .phase-head { align-items: start; }
+      .phase-count { display: none; }
+      .day-card { padding: 16px; }
+      .scope-banner { align-items: start; flex-direction: column; }
+      .list-head { align-items: start; }
+      .legend { display: none; }
+      .flashcard { min-height: 330px; padding-inline: 20px; }
+      .study-actions {
+        position: sticky; bottom: 0; z-index: 2; grid-template-columns: 1fr 1fr;
+        padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); background: #f6f7f2;
+      }
+      .study-actions .shuffle { grid-column: 1 / -1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
+
+    @media print {
+      @page { margin: 12mm; }
+      body { background: white; color: black; font-size: 10pt; }
+      .site-header, .toolbar-shell, .nav-actions, .progress-card, .legend, .guide, #curriculumPanel, footer, .modal, .learn-check, .scope-banner { display: none !important; }
+      .hero { display: block; padding: 0 0 8mm; }
+      h1 { font-size: 25pt; }
+      .lead { margin-top: 3mm; font-size: 10pt; }
+      main { padding: 0; }
+      .list-head { margin-bottom: 4mm; }
+      .word-grid { grid-template-columns: repeat(2, 1fr); gap: 2mm; }
+      .word-card, .word-card.learned { display: grid; grid-template-columns: 9mm 1.15fr 1fr; min-height: 0; padding: 2.5mm; break-inside: avoid; box-shadow: none; background: white; border-radius: 2mm; }
+      .word-card.learned .vietnamese { text-decoration: none; }
+      .vietnamese { font-size: 11pt; }
+      .pronunciation, .meaning, .num { color: #333; font-size: 8.5pt; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">학습 내용으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <div class="brand"><span class="flag-dot" aria-hidden="true">★</span><span>VIỆT 300</span></div>
+      <div class="nav-actions">
+        <button class="btn ghost" id="printButton" type="button">인쇄하기</button>
+        <button class="btn" id="resetButton" type="button">진도 초기화</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="wrap hero" aria-labelledby="pageTitle">
+    <div>
+      <p class="eyebrow">10일 여행 회화 챌린지</p>
+      <h1 id="pageTitle">베트남어<br><span class="accent">생존회화 300</span></h1>
+      <p class="lead">여행지에서 바로 꺼내 쓰는 말부터 외우세요. 뜻을 보고 3초 안에 베트남어가 나오면 체크!</p>
+    </div>
+    <aside class="progress-card" aria-label="전체 학습 진도">
+      <p class="progress-label">나의 암기 진도</p>
+      <div class="progress-number"><strong id="progressPercent">0%</strong><span id="progressFraction">0 / 300</span></div>
+      <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+      <div class="progress-foot"><span>오늘도 한 문장씩</span><span id="remainingText">300개 남음</span></div>
+    </aside>
+  </section>
+
+  <div class="toolbar-shell">
+    <div class="wrap">
+      <div class="view-switch" role="tablist" aria-label="학습 화면 선택">
+        <button class="view-tab" id="curriculumTab" type="button" role="tab" aria-selected="true" aria-controls="curriculumPanel">10일 커리큘럼</button>
+        <button class="view-tab" id="wordsTab" type="button" role="tab" aria-selected="false" aria-controls="wordsPanel" tabindex="-1">전체 300</button>
+      </div>
+      <div class="word-tools" id="wordTools" hidden>
+        <div class="toolbar">
+          <div class="search-wrap">
+            <label class="sr-only" for="search">베트남어, 발음 또는 뜻 검색</label>
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="search" type="search" autocomplete="off" placeholder="베트남어·발음·뜻 검색">
+            <button class="clear-search" id="clearSearch" type="button" aria-label="검색어 지우기" hidden>×</button>
+          </div>
+          <button class="btn primary" id="studyButton" type="button">암기카드 <span>시작</span></button>
+        </div>
+        <nav class="category-strip" id="categoryStrip" aria-label="주제별 필터"></nav>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" id="mainContent">
+    <section id="curriculumPanel" role="tabpanel" aria-labelledby="curriculumTab">
+      <div class="curriculum-head">
+        <div class="curriculum-intro">
+          <p class="section-kicker">Your 10-day route</p>
+          <h2>날짜대로, 오늘 할 만큼만</h2>
+          <p class="curriculum-copy">매일 한 주제씩 신규 30개를 익혀 10일에 300개를 완주합니다. 각 날짜에는 1·3·7일 간격으로 다시 볼 복습 범위도 함께 표시돼요.</p>
+          <p class="schedule-summary" id="scheduleSummary" aria-live="polite"></p>
+        </div>
+        <div class="date-card">
+          <label for="startDate">커리큘럼 시작일</label>
+          <div class="date-row">
+            <input id="startDate" type="date" aria-describedby="dateHelp">
+            <button class="btn" id="todayStartButton" type="button">오늘부터</button>
+          </div>
+          <p class="date-help" id="dateHelp">변경한 날짜는 이 기기에 자동 저장됩니다.</p>
+        </div>
+      </div>
+      <div id="curriculumList" aria-label="10일 학습 일정"></div>
+    </section>
+
+    <section id="wordsPanel" role="tabpanel" aria-labelledby="wordsTab" hidden>
+      <div class="scope-banner" id="scopeBanner" hidden>
+        <span id="scopeText"></span>
+        <button class="btn" id="clearScope" type="button">전체 300개로</button>
+      </div>
+      <section aria-labelledby="listTitle">
+      <div class="list-head">
+        <div>
+          <h2 id="listTitle">전체 표현</h2>
+          <p class="result-count" id="resultCount" aria-live="polite">300개 표현</p>
+        </div>
+        <p class="legend">외웠다면 오른쪽 체크 ✓</p>
+      </div>
+      <div class="word-grid" id="wordList"></div>
+      </section>
+
+      <section class="guide" aria-labelledby="guideTitle">
+      <h2 id="guideTitle">외우는 방법</h2>
+      <div class="guide-grid">
+        <details open>
+          <summary>반드시 외울 문장 틀 10개</summary>
+          <div class="details-body">
+            <ol class="patterns">
+              <li><code>Tôi muốn ___.</code> — 저는 ___을 원해요.</li>
+              <li><code>Tôi cần ___.</code> — 저는 ___이 필요해요.</li>
+              <li><code>Cho tôi ___, được không ạ?</code> — ___을 주시겠어요?</li>
+              <li><code>Tôi muốn đi đến ___.</code> — ___에 가고 싶어요.</li>
+              <li><code>___ ở đâu?</code> — ___은 어디예요?</li>
+              <li><code>Có ___ không?</code> — ___이 있나요?</li>
+              <li><code>___ bao nhiêu tiền?</code> — ___은 얼마예요?</li>
+              <li><code>Tôi có thể ___ không?</code> — 제가 ___해도 되나요?</li>
+              <li><code>Tôi không hiểu. Xin nói chậm / nói lại.</code> — 이해 못 했어요. 천천히 / 다시 말해 주세요.</li>
+              <li><code>Tôi bị đau ___. Tôi cần bác sĩ.</code> — ___이 아파요. 의사가 필요해요.</li>
+            </ol>
+          </div>
+        </details>
+        <details open>
+          <summary>하루 25분 루틴</summary>
+          <div class="details-body">
+            <ol class="routine">
+              <li>전날 복습 <strong>5분</strong></li>
+              <li>신규 단어 듣고 따라 말하기 <strong>10분</strong></li>
+              <li>뜻을 가리고 회상하기 <strong>7분</strong></li>
+              <li>문장 틀에 끼워 말하기 <strong>3분</strong></li>
+            </ol>
+            <p class="notice"><strong>발음 안내</strong><br>한글 표기는 북부 표준 발음에 가까운 읽기 힌트입니다. 성조는 베트남어 철자와 원어민 음성을 함께 확인하세요.</p>
+          </div>
+        </details>
+        <details class="plan-card">
+          <summary>10일 암기 계획</summary>
+          <div class="details-body">
+            <div class="plan-stages">
+              <div class="plan-stage"><strong>매일 신규</strong><span>주제별 30개를 듣고 따라 말하기</span></div>
+              <div class="plan-stage"><strong>간격 복습</strong><span>1일·3일·7일 전에 배운 범위 다시 보기</span></div>
+              <div class="plan-stage"><strong>10일 완주</strong><span>하루 30개 × 10일로 전체 300개 학습</span></div>
+            </div>
+          </div>
+        </details>
+      </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner"><span>베트남어 생존회화 300</span><span>10일 완주 · 복습 간격: 1일 → 3일 → 7일</span></div>
+  </footer>
+
+  <div class="modal" id="studyModal" role="dialog" aria-modal="true" aria-labelledby="studyTitle" aria-hidden="true">
+    <section class="study-panel">
+      <div class="study-top">
+        <div>
+          <strong id="studyTitle">암기카드</strong>
+          <div class="study-meta" id="studyMeta" aria-live="polite"></div>
+        </div>
+        <button class="icon-btn" id="closeStudy" type="button" aria-label="암기카드 닫기">×</button>
+      </div>
+      <button class="flashcard" id="flashcard" type="button" aria-label="정답 보기">
+        <span class="flash-category" id="flashCategory"></span>
+        <span class="flash-num" id="flashNum"></span>
+        <span class="flash-prompt" id="flashPrompt">뜻을 보고 베트남어로 말해보세요</span>
+        <span class="flash-meaning" id="flashMeaning"></span>
+        <span class="flash-answer" id="flashAnswer">
+          <span class="flash-vietnamese" id="flashVietnamese" lang="vi"></span>
+          <span class="flash-pron" id="flashPron"></span>
+          <span class="flash-answer-meaning" id="flashAnswerMeaning"></span>
+        </span>
+        <span class="reveal-hint">카드를 누르면 정답이 보여요</span>
+      </button>
+      <div class="study-actions">
+        <button class="btn shuffle" id="shuffleButton" type="button" aria-pressed="false">순서 섞기</button>
+        <button class="btn" id="listenButton" type="button">발음 듣기</button>
+        <button class="btn" id="revealButton" type="button">정답 보기</button>
+        <button class="btn" id="againButton" type="button">다시 볼래요</button>
+        <button class="btn" id="learnedButton" type="button">외웠어요 ✓</button>
+        <button class="btn primary" id="nextButton" type="button">다음 카드</button>
+      </div>
+      <p class="study-help">Space 정답 보기 · → 다음 · L 외움 표시 · Esc 닫기 · 음성은 기기의 베트남어 음성을 사용해요</p>
+    </section>
+  </div>
+
+  <script>
+    "use strict";
+
+    const RAW = [
+      ["xin chào","씬 짜오","안녕하세요"],
+      ["cảm ơn","깜 언","감사합니다"],
+      ["xin lỗi","씬 로이","미안합니다 / 실례합니다"],
+      ["không sao","콩 싸오","괜찮아요"],
+      ["vâng","벙","네(북부에서 흔함)"],
+      ["dạ","자 / 야","네·예(공손)"],
+      ["không","콩","아니요 / 안"],
+      ["được","드억","돼요 / 좋아요"],
+      ["không được","콩 드억","안 돼요"],
+      ["làm ơn","람 언","부탁합니다 / 제발"],
+      ["giúp tôi","줍 또이","도와주세요"],
+      ["tôi","또이","나 / 저"],
+      ["bạn","반","친구; 또래·친근한 상대를 부르는 말"],
+      ["anh","아잉","연상 남성 호칭"],
+      ["chị","찌","연상 여성 호칭"],
+      ["em","엠","어린 사람·동생 호칭"],
+      ["ông","옹","연장자 남성·할아버지"],
+      ["bà","바","연장자 여성·할머니"],
+      ["chúng tôi","쭝 또이","우리(상대방 제외)"],
+      ["người Hàn Quốc","응으어이 한 꾸옥","한국인"],
+      ["tiếng Việt","띠엥 비엣","베트남어"],
+      ["tiếng Anh","띠엥 아잉","영어"],
+      ["tôi không hiểu","또이 콩 히에우","이해 못 해요"],
+      ["xin nói chậm lại","씬 노이 쩜 라이","좀 더 천천히 말해 주세요"],
+      ["xin nói lại","씬 노이 라이","다시 말해 주세요"],
+      ["xin viết ra","씬 비엣 자","적어 주세요"],
+      ["đúng","둥","맞아요"],
+      ["sai","싸이","틀려요"],
+      ["tốt","똣","좋아요 / 좋은"],
+      ["cẩn thận","껀 턴","조심하세요"],
+      ["ai","아이","누구"],
+      ["gì","지","무엇"],
+      ["ở đâu","어 더우","어디에"],
+      ["khi nào","키 나오","언제"],
+      ["tại sao","따이 싸오","왜"],
+      ["như thế nào","느 테 나오","어떻게"],
+      ["bao nhiêu","바오 니에우","얼마 / 몇"],
+      ["cái này","까이 나이","이것"],
+      ["cái kia","까이 끼어","저것"],
+      ["có","꼬","있다 / 가지다"],
+      ["có không?","꼬 콩?","있어요?"],
+      ["muốn","무온","원하다"],
+      ["cần","껀","필요하다"],
+      ["biết","비엣","알다"],
+      ["tìm","띰","찾다"],
+      ["đi","디","가다"],
+      ["đến","덴","오다 / 도착하다"],
+      ["về","베","돌아가다"],
+      ["vào","바오","들어가다"],
+      ["ra","자","나가다"],
+      ["dừng lại","증 라이","멈추세요"],
+      ["chờ","쩌","기다리다"],
+      ["mở","머","열다"],
+      ["đóng","동","닫다"],
+      ["xem","쎔","보다"],
+      ["nghe","응에","듣다"],
+      ["ăn","안","먹다"],
+      ["uống","우옹","마시다"],
+      ["ngủ","응우","자다"],
+      ["gọi","고이","부르다 / 전화하다"],
+      ["trái","짜이","왼쪽"],
+      ["phải","파이","오른쪽"],
+      ["thẳng","탕","직진 / 곧장"],
+      ["trước","쯔억","앞 / 전에"],
+      ["sau","싸우","뒤 / 후에"],
+      ["gần","건","가깝다"],
+      ["xa","싸","멀다"],
+      ["bên cạnh","벤 까잉","옆"],
+      ["đối diện","도이 지엔","맞은편"],
+      ["ở đây","어 더이","여기"],
+      ["ở đó","어 도","거기 / 저기"],
+      ["đường","드엉","길 / 도로"],
+      ["ngã tư","응아 뜨","사거리"],
+      ["bản đồ","반 도","지도"],
+      ["địa chỉ","지어 찌","주소"],
+      ["sân bay","썬 바이","공항"],
+      ["nhà ga","냐 가","기차역"],
+      ["bến xe","벤 쎄","버스터미널"],
+      ["trạm xe buýt","짬 쎄 부잇","버스 정류장"],
+      ["khách sạn","칵 산","호텔"],
+      ["nhà vệ sinh","냐 베 씽","화장실"],
+      ["taxi","딱씨","택시"],
+      ["xe buýt","쎄 부잇","버스"],
+      ["tàu hỏa","따우 호아","기차"],
+      ["tàu điện","따우 디엔","전철 / 도시철도"],
+      ["xe máy","쎄 마이","오토바이"],
+      ["ô tô","오 또","자동차"],
+      ["vé","베","표 / 티켓"],
+      ["lên","렌","타다 / 올라가다"],
+      ["xuống","쑤옹","내리다 / 내려가다"],
+      ["nhà hàng","냐 항","식당"],
+      ["quán ăn","꽌 안","음식점"],
+      ["thực đơn","특 던","메뉴"],
+      ["món ăn","몬 안","요리 / 음식"],
+      ["cơm","껌","밥 / 식사"],
+      ["phở","퍼","쌀국수"],
+      ["bánh mì","바잉 미","반미 / 빵"],
+      ["bún","분","가는 쌀국수"],
+      ["thịt","팃","고기"],
+      ["bò","보","소 / 쇠고기"],
+      ["gà","가","닭 / 닭고기"],
+      ["heo","헤오","돼지 / 돼지고기(남부)"],
+      ["cá","까","생선"],
+      ["hải sản","하이 산","해산물"],
+      ["rau","자우","채소"],
+      ["trái cây","짜이 꺼이","과일(남부)"],
+      ["nước","느억","물 / 음료"],
+      ["cà phê","까 페","커피"],
+      ["bia","비어","맥주"],
+      ["trà","짜","차"],
+      ["sữa","쓰어","우유"],
+      ["đá","다","얼음"],
+      ["nóng","농","뜨거운"],
+      ["lạnh","라잉","차가운"],
+      ["cay","까이","매운"],
+      ["ngọt","응엇","단"],
+      ["đồ chay","도 짜이","채식 음식"],
+      ["ngon","응언","맛있는"],
+      ["dị ứng","지 응","알레르기"],
+      ["không cay","콩 까이","안 맵게"],
+      ["cửa hàng","끄어 항","가게"],
+      ["chợ","쩌","시장"],
+      ["siêu thị","씨에우 티","슈퍼마켓"],
+      ["mua","무어","사다"],
+      ["bán","반","팔다"],
+      ["giá","자","가격"],
+      ["tiền","띠엔","돈"],
+      ["đồng","동","동(베트남 화폐)"],
+      ["tiền mặt","띠엔 맛","현금"],
+      ["thẻ","테","카드"],
+      ["hóa đơn","호아 던","계산서 / 청구서"],
+      ["biên lai","비엔 라이","영수증"],
+      ["rẻ","제","싸다"],
+      ["đắt","닷","비싸다"],
+      ["giảm giá","잠 자","할인"],
+      ["mặc cả","막 까","흥정"],
+      ["kích cỡ","끽 꺼","사이즈"],
+      ["nhỏ","뇨","작은"],
+      ["lớn","런","큰"],
+      ["màu","마우","색"],
+      ["đỏ","도","빨간색"],
+      ["xanh","싸잉","파란색 / 초록색"],
+      ["đen","댄","검은색"],
+      ["trắng","짱","흰색"],
+      ["thử","트","입어보다 / 시험하다"],
+      ["đổi","도이","교환하다 / 바꾸다"],
+      ["trả lại","짜 라이","반품하다 / 돌려주다"],
+      ["mở cửa","머 끄어","영업 중 / 문을 열다"],
+      ["đóng cửa","동 끄어","영업 종료 / 문을 닫다"],
+      ["hết hàng","헷 항","품절"],
+      ["nhà nghỉ","냐 응이","여관 / 저가 숙소"],
+      ["phòng","퐁","방"],
+      ["đặt phòng","닷 퐁","방을 예약하다"],
+      ["còn phòng không?","꼰 퐁 콩?","빈방 있나요?"],
+      ["một đêm","못 뎀","하룻밤"],
+      ["nhận phòng","년 퐁","체크인"],
+      ["trả phòng","짜 퐁","체크아웃"],
+      ["lễ tân","레 떤","프런트 / 접수처"],
+      ["chìa khóa","찌어 콰","열쇠"],
+      ["hộ chiếu","호 찌에우","여권"],
+      ["tiền đặt cọc","띠엔 닷 꼭","보증금"],
+      ["bữa sáng","브어 상","아침 식사"],
+      ["Wi-Fi","와이파이","와이파이"],
+      ["mật khẩu","멋 커우","비밀번호"],
+      ["điều hòa","디에우 화","에어컨(북부)"],
+      ["nước nóng","느억 농","온수"],
+      ["phòng tắm","퐁 땀","욕실"],
+      ["vòi hoa sen","버이 화 센","샤워기"],
+      ["khăn tắm","칸 땀","목욕 수건"],
+      ["xà phòng","싸 퐁","비누"],
+      ["giấy vệ sinh","저이 베 씽","화장지"],
+      ["giường","즈엉","침대"],
+      ["chăn","짠","이불"],
+      ["gối","고이","베개"],
+      ["thang máy","탕 마이","엘리베이터"],
+      ["cầu thang","꺼우 탕","계단"],
+      ["tầng","떵","층"],
+      ["phòng đơn","퐁 던","1인실"],
+      ["phòng đôi","퐁 도이","2인실 / 더블룸"],
+      ["hành lý","한 리","짐 / 수하물"],
+      ["số không","소 콩","숫자 0"],
+      ["một","못","1"],
+      ["hai","하이","2"],
+      ["ba","바","3"],
+      ["bốn","본","4"],
+      ["năm","남","5"],
+      ["sáu","사우","6"],
+      ["bảy","바이","7"],
+      ["tám","땀","8"],
+      ["chín","찐","9"],
+      ["mười","므어이","10"],
+      ["trăm","짬","백 / 100"],
+      ["nghìn / ngàn","응인 / 응안","천 / 1,000(북부 / 남부)"],
+      ["triệu","찌에우","백만 / 1,000,000"],
+      ["mấy giờ?","머이 저?","몇 시예요?"],
+      ["giờ","저","시 / 시간"],
+      ["phút","풋","분"],
+      ["hôm nay","홈 나이","오늘"],
+      ["ngày mai","응아이 마이","내일"],
+      ["hôm qua","홈 꽈","어제"],
+      ["buổi sáng","부오이 상","아침"],
+      ["buổi trưa","부오이 쯔어","정오 / 점심때"],
+      ["buổi chiều","부오이 찌에우","오후"],
+      ["buổi tối","부오이 또이","저녁 / 밤"],
+      ["bây giờ","버이 저","지금"],
+      ["sớm","썸","일찍 / 이른"],
+      ["muộn","무온","늦게 / 늦은"],
+      ["bao lâu?","바오 러우?","얼마나 오래요?"],
+      ["mấy ngày?","머이 응아이?","며칠이요?"],
+      ["mươi","므어이","20·30 등에서 쓰는 ‘십’"],
+      ["bệnh viện","벤 비엔","병원"],
+      ["nhà thuốc","냐 투옥","약국"],
+      ["bác sĩ","박 씨","의사"],
+      ["thuốc","투옥","약"],
+      ["đau","다우","아프다 / 통증"],
+      ["đau đầu","다우 더우","두통"],
+      ["đau bụng","다우 붕","복통"],
+      ["đau răng","다우 장","치통"],
+      ["sốt","솟","열 / 발열"],
+      ["ho","허","기침"],
+      ["tiêu chảy","띠에우 짜이","설사"],
+      ["buồn nôn","부온 논","메스꺼움"],
+      ["chóng mặt","쫑 맛","어지러움"],
+      ["khó thở","커 터","숨쉬기 힘들다"],
+      ["chảy máu","짜이 마우","피가 나다"],
+      ["vết thương","벳 트엉","상처"],
+      ["cấp cứu","껍 끄우","응급 / 응급실"],
+      ["xe cấp cứu","쎄 껍 끄우","구급차"],
+      ["cứu tôi với!","끄우 또이 버이!","살려 주세요!"],
+      ["cảnh sát","까잉 삿","경찰"],
+      ["gọi cảnh sát!","고이 까잉 삿!","경찰을 불러 주세요!"],
+      ["cháy","짜이","불이 나다 / 타다"],
+      ["nguy hiểm","응위 히엠","위험"],
+      ["tôi bị mất…","또이 비 멋…","…을 잃어버렸어요"],
+      ["tôi bị mất cắp…","또이 비 멋 깝…","…을 도난당했어요"],
+      ["băng cá nhân","방 까 년","반창고"],
+      ["bảo hiểm y tế","바오 히엠 이 떼","의료보험"],
+      ["ngộ độc thực phẩm","응오 독 특 펌","식중독"],
+      ["tôi dị ứng với…","또이 지 응 버이…","저는 …에 알레르기가 있어요"],
+      ["thuốc giảm đau","투옥 잠 다우","진통제"],
+      ["điện thoại","디엔 토아이","전화 / 휴대전화"],
+      ["số điện thoại","소 디엔 토아이","전화번호"],
+      ["thẻ SIM","테 심","유심 카드"],
+      ["Internet","인떠넷","인터넷"],
+      ["bộ sạc","보 삭","충전기"],
+      ["pin","삔","배터리"],
+      ["ổ cắm","오 깜","콘센트"],
+      ["gọi điện","고이 디엔","전화하다"],
+      ["tin nhắn","띤 냔","문자 / 메시지"],
+      ["không có mạng","콩 꼬 망","인터넷이 안 돼요"],
+      ["người","응으어이","사람"],
+      ["gia đình","자 딘","가족"],
+      ["trẻ em","쩨 엠","어린이"],
+      ["đàn ông","단 옹","남자"],
+      ["phụ nữ","푸 느","여자"],
+      ["nhân viên","년 비엔","직원"],
+      ["tài xế","따이 쎄","운전기사"],
+      ["hướng dẫn viên","흐엉 전 비엔","안내원 / 가이드"],
+      ["đại sứ quán","다이 스 꽌","대사관"],
+      ["lãnh sự quán","라잉 스 꽌","영사관"],
+      ["thời tiết","터이 띠엣","날씨"],
+      ["mưa","므어","비"],
+      ["nắng","낭","햇빛 / 맑은 날씨"],
+      ["gió","저","바람"],
+      ["bão","바오","폭풍 / 태풍"],
+      ["trời mưa","쩌이 므어","비가 와요"],
+      ["nhiệt độ","니엣 도","온도"],
+      ["ẩm","엄","습한"],
+      ["khô","코","건조한"],
+      ["nhiều mây","니에우 머이","구름이 많은"],
+      ["xấu","써우","나쁜 / 못생긴"],
+      ["nhiều","니에우","많은"],
+      ["ít","잇","적은"],
+      ["nhanh","냐잉","빠른 / 빨리"],
+      ["chậm","쩜","느린 / 천천히"],
+      ["sạch","색","깨끗한"],
+      ["bẩn","번","더러운"],
+      ["an toàn","안 똰","안전한"],
+      ["dễ","제","쉬운"],
+      ["khó","커","어려운"],
+      ["mới","머이","새로운"],
+      ["cũ","꾸","오래된 / 중고의"],
+      ["đủ","두","충분한"],
+      ["thêm","템","더 / 추가하다"],
+      ["quá","꽈","너무 / 매우"],
+      ["rất","젓","매우"],
+      ["giống nhau","종 냐우","같은 / 서로 닮은"],
+      ["khác","칵","다른"],
+      ["đẹp","뎁","아름다운 / 예쁜"],
+      ["ổn","온","괜찮은 / 문제없는"],
+      ["sẵn sàng","산 상","준비된"],
+      ["bận","번","바쁜"],
+      ["miễn phí","미엔 피","무료"],
+      ["tạm biệt","땀 비엣","안녕 / 안녕히 가세요·계세요"],
+      ["không có gì","콩 꼬 지","천만에요"],
+      ["rất vui được gặp bạn","젓 부이 드억 갑 반","만나서 반가워요"],
+      ["chúc may mắn","쭉 마이 만","행운을 빌어요"],
+      ["tính tiền","띵 띠엔","계산해 주세요"],
+      ["đắt quá","닷 꽈","너무 비싸요"],
+      ["bớt được không?","벗 드억 콩?","깎아 주실 수 있나요?"]
+    ];
+
+    const CATEGORIES = [
+      "핵심·인사·예절", "질문·행동", "방향·교통", "음식·음료", "쇼핑·돈",
+      "숙소", "숫자·시간", "건강·긴급상황", "통신·사람·날씨", "상태·실전 표현"
+    ];
+    const WORDS = RAW.map((row, index) => ({
+      id: index + 1,
+      vietnamese: row[0],
+      pronunciation: row[1],
+      meaning: row[2],
+      category: CATEGORIES[Math.floor(index / 30)]
+    }));
+
+    const STORAGE_KEY = "viet300-learned-v1";
+    const START_DATE_KEY = "viet300-start-date-v1";
+    const COURSE_DAYS = 10;
+    const WORDS_PER_DAY = 30;
+    const REVIEW_OFFSETS = [1, 3, 7];
+    const state = {
+      view: "curriculum",
+      category: "전체",
+      query: "",
+      wordScope: null,
+      scopeLabel: "",
+      startDate: loadStartDate(),
+      learned: loadLearned(),
+      deck: [],
+      deckIndex: 0,
+      shuffled: false,
+      studyLabel: "암기카드",
+      returnFocus: null,
+      returnDay: null
+    };
+
+    const els = {
+      curriculumTab: document.querySelector("#curriculumTab"),
+      wordsTab: document.querySelector("#wordsTab"),
+      curriculumPanel: document.querySelector("#curriculumPanel"),
+      wordsPanel: document.querySelector("#wordsPanel"),
+      wordTools: document.querySelector("#wordTools"),
+      curriculumList: document.querySelector("#curriculumList"),
+      scheduleSummary: document.querySelector("#scheduleSummary"),
+      startDate: document.querySelector("#startDate"),
+      categoryStrip: document.querySelector("#categoryStrip"),
+      search: document.querySelector("#search"),
+      clearSearch: document.querySelector("#clearSearch"),
+      wordList: document.querySelector("#wordList"),
+      listTitle: document.querySelector("#listTitle"),
+      resultCount: document.querySelector("#resultCount"),
+      scopeBanner: document.querySelector("#scopeBanner"),
+      scopeText: document.querySelector("#scopeText"),
+      progressPercent: document.querySelector("#progressPercent"),
+      progressFraction: document.querySelector("#progressFraction"),
+      progressBar: document.querySelector("#progressBar"),
+      remainingText: document.querySelector("#remainingText"),
+      studyButton: document.querySelector("#studyButton"),
+      studyModal: document.querySelector("#studyModal"),
+      studyTitle: document.querySelector("#studyTitle"),
+      studyMeta: document.querySelector("#studyMeta"),
+      flashcard: document.querySelector("#flashcard"),
+      flashCategory: document.querySelector("#flashCategory"),
+      flashNum: document.querySelector("#flashNum"),
+      flashPrompt: document.querySelector("#flashPrompt"),
+      flashMeaning: document.querySelector("#flashMeaning"),
+      flashVietnamese: document.querySelector("#flashVietnamese"),
+      flashPron: document.querySelector("#flashPron"),
+      flashAnswerMeaning: document.querySelector("#flashAnswerMeaning"),
+      learnedButton: document.querySelector("#learnedButton"),
+      revealButton: document.querySelector("#revealButton"),
+      shuffleButton: document.querySelector("#shuffleButton"),
+      listenButton: document.querySelector("#listenButton")
+    };
+
+    function loadLearned() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        return new Set(Array.isArray(saved) ? saved.filter(id => Number.isInteger(id) && id >= 1 && id <= RAW.length) : []);
+      } catch (_) {
+        return new Set();
+      }
+    }
+
+    function saveLearned() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify([...state.learned].sort((a, b) => a - b))); } catch (_) {}
+    }
+
+    function localToday() {
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
+    function toLocalISO(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function parseLocalISO(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || "");
+      if (!match) return null;
+      const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+      return toLocalISO(date) === value ? date : null;
+    }
+
+    function loadStartDate() {
+      const fallback = toLocalISO(localToday());
+      try {
+        const saved = localStorage.getItem(START_DATE_KEY);
+        if (parseLocalISO(saved)) return saved;
+        localStorage.setItem(START_DATE_KEY, fallback);
+      } catch (_) {}
+      return fallback;
+    }
+
+    function saveStartDate() {
+      try { localStorage.setItem(START_DATE_KEY, state.startDate); } catch (_) {}
+    }
+
+    function addDays(date, amount) {
+      const next = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      next.setDate(next.getDate() + amount);
+      return next;
+    }
+
+    function calendarDifference(fromDate, toDate) {
+      const fromUTC = Date.UTC(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
+      const toUTC = Date.UTC(toDate.getFullYear(), toDate.getMonth(), toDate.getDate());
+      return Math.round((toUTC - fromUTC) / 86400000);
+    }
+
+    function formatScheduleDate(date, includeYear = false) {
+      return new Intl.DateTimeFormat("ko-KR", {
+        ...(includeYear ? { year: "numeric" } : {}),
+        month: "short",
+        day: "numeric",
+        weekday: "short"
+      }).format(date);
+    }
+
+    function getDayWords(dayNumber) {
+      const startIndex = (dayNumber - 1) * WORDS_PER_DAY;
+      return WORDS.slice(startIndex, startIndex + WORDS_PER_DAY);
+    }
+
+    function setView(view) {
+      state.view = view;
+      const curriculumActive = view === "curriculum";
+      els.curriculumPanel.hidden = !curriculumActive;
+      els.wordsPanel.hidden = curriculumActive;
+      els.wordTools.hidden = curriculumActive;
+      els.curriculumTab.setAttribute("aria-selected", String(curriculumActive));
+      els.wordsTab.setAttribute("aria-selected", String(!curriculumActive));
+      els.curriculumTab.tabIndex = curriculumActive ? 0 : -1;
+      els.wordsTab.tabIndex = curriculumActive ? -1 : 0;
+    }
+
+    function normalize(text) {
+      return text.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+    }
+
+    function getFilteredWords() {
+      const query = normalize(state.query.trim());
+      return WORDS.filter(word => {
+        const scopeMatches = !state.wordScope || state.wordScope.has(word.id);
+        const categoryMatches = state.category === "전체" || word.category === state.category;
+        const textMatches = !query || normalize(`${word.id} ${word.vietnamese} ${word.pronunciation} ${word.meaning}`).includes(query);
+        return scopeMatches && categoryMatches && textMatches;
+      });
+    }
+
+    function renderScheduleSummary(startDate) {
+      const endDate = addDays(startDate, COURSE_DAYS - 1);
+      const currentOffset = calendarDifference(startDate, localToday());
+      let positionText;
+      if (currentOffset < 0) {
+        positionText = `시작까지 ${Math.abs(currentOffset)}일`;
+      } else if (currentOffset < COURSE_DAYS) {
+        positionText = `오늘은 Day ${currentOffset + 1}`;
+      } else {
+        positionText = "10일 일정 종료 · 전체 복습 추천";
+      }
+
+      const range = document.createElement("strong");
+      range.textContent = `${formatScheduleDate(startDate, true)} → ${formatScheduleDate(endDate, true)}`;
+      const dot = document.createElement("span");
+      dot.className = "summary-dot";
+      dot.setAttribute("aria-hidden", "true");
+      const position = document.createElement("span");
+      position.textContent = positionText;
+      els.scheduleSummary.replaceChildren(range, dot, position);
+    }
+
+    function getDayStatus(dayDate, learnedCount) {
+      const distanceFromToday = calendarDifference(dayDate, localToday());
+      if (distanceFromToday === 0) {
+        return { key: "today", label: learnedCount === WORDS_PER_DAY ? "오늘 · 완료" : "오늘" };
+      }
+      if (learnedCount === WORDS_PER_DAY) return { key: "completed", label: "학습 완료" };
+      if (distanceFromToday > 0) return { key: "overdue", label: "복습 필요" };
+      return { key: "upcoming", label: "예정" };
+    }
+
+    function getReviewDue(dayNumber) {
+      return REVIEW_OFFSETS.map(offset => ({ day: dayNumber - offset, offset }))
+        .filter(item => item.day >= 1);
+    }
+
+    function renderCurriculum() {
+      const startDate = parseLocalISO(state.startDate) || localToday();
+      els.startDate.value = toLocalISO(startDate);
+      renderScheduleSummary(startDate);
+      els.curriculumList.replaceChildren();
+
+      const phase = document.createElement("section");
+      phase.className = "phase";
+      phase.setAttribute("aria-labelledby", "dailyPhaseTitle");
+      const phaseHead = document.createElement("div");
+      phaseHead.className = "phase-head";
+      const phaseHeadingWrap = document.createElement("div");
+      const phaseTitle = document.createElement("h3");
+      phaseTitle.id = "dailyPhaseTitle";
+      phaseTitle.textContent = "Day 1–10 · 주제별 신규 학습";
+      const phaseDescription = document.createElement("p");
+      phaseDescription.textContent = "하루 30개씩, 이전 범위는 1·3·7일 간격으로 짧게 복습하세요.";
+      phaseHeadingWrap.append(phaseTitle, phaseDescription);
+      const phaseCount = document.createElement("span");
+      phaseCount.className = "phase-count";
+      phaseCount.textContent = "10일 · 총 300개";
+      phaseHead.append(phaseHeadingWrap, phaseCount);
+
+      const grid = document.createElement("div");
+      grid.className = "day-grid";
+
+      for (let dayNumber = 1; dayNumber <= COURSE_DAYS; dayNumber += 1) {
+        const words = getDayWords(dayNumber);
+        const learnedCount = words.filter(word => state.learned.has(word.id)).length;
+        const dayDate = addDays(startDate, dayNumber - 1);
+        const status = getDayStatus(dayDate, learnedCount);
+        const firstId = words[0].id;
+        const lastId = words[words.length - 1].id;
+
+        const card = document.createElement("article");
+        card.className = `day-card ${status.key}`;
+        card.dataset.day = String(dayNumber);
+        card.setAttribute("aria-labelledby", `dayTitle${dayNumber}`);
+        if (status.key === "today") card.setAttribute("aria-current", "date");
+
+        const top = document.createElement("div");
+        top.className = "day-top";
+        const dateWrap = document.createElement("div");
+        const dayLabel = document.createElement("span");
+        dayLabel.className = "day-label";
+        dayLabel.textContent = `DAY ${dayNumber}`;
+        const time = document.createElement("time");
+        time.className = "day-date";
+        time.dateTime = toLocalISO(dayDate);
+        time.textContent = formatScheduleDate(dayDate, true);
+        dateWrap.append(dayLabel, time);
+        const statusBadge = document.createElement("span");
+        statusBadge.className = "day-status";
+        statusBadge.textContent = status.label;
+        top.append(dateWrap, statusBadge);
+
+        const title = document.createElement("h4");
+        title.id = `dayTitle${dayNumber}`;
+        title.textContent = CATEGORIES[dayNumber - 1];
+        const task = document.createElement("p");
+        task.className = "day-task";
+        task.textContent = `${String(firstId).padStart(3, "0")}–${String(lastId).padStart(3, "0")}번 · 신규 30개를 소리 내어 3회씩 말하기`;
+
+        const progress = document.createElement("div");
+        progress.className = "day-progress";
+        const progressHead = document.createElement("div");
+        progressHead.className = "day-progress-head";
+        const progressLabel = document.createElement("span");
+        progressLabel.textContent = "암기 진도";
+        const progressValue = document.createElement("strong");
+        progressValue.textContent = `${learnedCount} / ${WORDS_PER_DAY}`;
+        progressHead.append(progressLabel, progressValue);
+        const miniBar = document.createElement("div");
+        miniBar.className = "mini-bar";
+        miniBar.setAttribute("role", "progressbar");
+        miniBar.setAttribute("aria-label", `Day ${dayNumber} 암기 진도`);
+        miniBar.setAttribute("aria-valuemin", "0");
+        miniBar.setAttribute("aria-valuemax", String(WORDS_PER_DAY));
+        miniBar.setAttribute("aria-valuenow", String(learnedCount));
+        const miniFill = document.createElement("span");
+        miniFill.style.width = `${Math.round((learnedCount / WORDS_PER_DAY) * 100)}%`;
+        miniBar.append(miniFill);
+        progress.append(progressHead, miniBar);
+
+        const review = document.createElement("div");
+        review.className = "review-due";
+        const reviewLabel = document.createElement("span");
+        reviewLabel.className = "review-label";
+        reviewLabel.textContent = "오늘 복습";
+        review.append(reviewLabel);
+        const reviewItems = getReviewDue(dayNumber);
+        if (!reviewItems.length) {
+          const empty = document.createElement("span");
+          empty.className = "review-empty";
+          empty.textContent = "첫날은 신규 학습에 집중";
+          review.append(empty);
+        } else {
+          reviewItems.forEach(item => {
+            const rangeStart = (item.day - 1) * WORDS_PER_DAY + 1;
+            const rangeEnd = item.day * WORDS_PER_DAY;
+            const chip = document.createElement("span");
+            chip.className = "review-chip";
+            chip.textContent = `D${item.day} ${String(rangeStart).padStart(3, "0")}–${String(rangeEnd).padStart(3, "0")} (+${item.offset})`;
+            review.append(chip);
+          });
+        }
+
+        const actions = document.createElement("div");
+        actions.className = "day-actions";
+        const viewButton = document.createElement("button");
+        viewButton.type = "button";
+        viewButton.className = "btn";
+        viewButton.textContent = "30개 목록 보기";
+        viewButton.setAttribute("aria-label", `Day ${dayNumber} 단어 30개 목록 보기`);
+        viewButton.addEventListener("click", () => showDayWords(dayNumber));
+        const studyButton = document.createElement("button");
+        studyButton.type = "button";
+        studyButton.className = "btn primary";
+        studyButton.textContent = "이 날짜 카드 학습";
+        studyButton.setAttribute("aria-label", `Day ${dayNumber} 단어 30개 암기카드 시작`);
+        studyButton.addEventListener("click", () => openStudy(words, {
+          title: `Day ${dayNumber} · ${CATEGORIES[dayNumber - 1]}`,
+          returnDay: dayNumber
+        }));
+        actions.append(viewButton, studyButton);
+
+        card.append(top, title, task, progress, review, actions);
+        grid.append(card);
+      }
+
+      phase.append(phaseHead, grid);
+      els.curriculumList.append(phase);
+    }
+
+    function showDayWords(dayNumber) {
+      const words = getDayWords(dayNumber);
+      state.wordScope = new Set(words.map(word => word.id));
+      state.scopeLabel = `Day ${dayNumber} · ${CATEGORIES[dayNumber - 1]} · ${words[0].id}–${words[words.length - 1].id}번`;
+      state.category = "전체";
+      state.query = "";
+      els.search.value = "";
+      els.clearSearch.hidden = true;
+      renderCategories();
+      renderWords();
+      setView("words");
+      requestAnimationFrame(() => els.wordsPanel.scrollIntoView({ block: "start" }));
+    }
+
+    function clearWordScope(render = true) {
+      state.wordScope = null;
+      state.scopeLabel = "";
+      if (render) renderWords();
+    }
+
+    function renderCategories() {
+      els.categoryStrip.replaceChildren();
+      ["전체", ...CATEGORIES].forEach(category => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "chip";
+        button.textContent = category;
+        button.setAttribute("aria-pressed", String(category === state.category));
+        button.addEventListener("click", () => {
+          clearWordScope(false);
+          state.category = category;
+          renderCategories();
+          renderWords();
+        });
+        els.categoryStrip.append(button);
+      });
+    }
+
+    function createWordCard(word) {
+      const article = document.createElement("article");
+      article.className = `word-card${state.learned.has(word.id) ? " learned" : ""}`;
+      article.dataset.id = String(word.id);
+
+      const number = document.createElement("span");
+      number.className = "num";
+      number.textContent = String(word.id).padStart(3, "0");
+
+      const phrase = document.createElement("div");
+      const vietnamese = document.createElement("strong");
+      vietnamese.className = "vietnamese";
+      vietnamese.lang = "vi";
+      vietnamese.textContent = word.vietnamese;
+      const pronunciation = document.createElement("span");
+      pronunciation.className = "pronunciation";
+      pronunciation.textContent = word.pronunciation;
+      phrase.append(vietnamese, pronunciation);
+
+      const meaning = document.createElement("div");
+      meaning.className = "meaning";
+      meaning.textContent = word.meaning;
+
+      const label = document.createElement("label");
+      label.className = "learn-check";
+      label.title = `${word.vietnamese} 외움 표시`;
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = state.learned.has(word.id);
+      checkbox.setAttribute("aria-label", `${word.vietnamese}, 외웠어요`);
+      checkbox.addEventListener("change", () => toggleLearned(word.id, checkbox.checked));
+      const checkmark = document.createElement("span");
+      checkmark.className = "checkmark";
+      checkmark.setAttribute("aria-hidden", "true");
+      label.append(checkbox, checkmark);
+      article.append(number, phrase, meaning, label);
+      return article;
+    }
+
+    function renderWords() {
+      const words = getFilteredWords();
+      els.wordList.replaceChildren();
+      els.scopeBanner.hidden = !state.wordScope;
+      els.scopeText.textContent = state.wordScope ? `${state.scopeLabel} · 선택한 날짜의 30개만 표시 중` : "";
+      els.listTitle.textContent = state.wordScope
+        ? state.scopeLabel
+        : (state.category === "전체" ? "전체 표현" : state.category);
+      els.resultCount.textContent = `${words.length}개 표현`;
+      els.studyButton.disabled = words.length === 0;
+      if (!words.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.innerHTML = "<strong>검색 결과가 없어요</strong>다른 단어나 뜻으로 찾아보세요.";
+        els.wordList.append(empty);
+        return;
+      }
+      const fragment = document.createDocumentFragment();
+      words.forEach(word => fragment.append(createWordCard(word)));
+      els.wordList.append(fragment);
+    }
+
+    function toggleLearned(id, checked) {
+      if (checked) state.learned.add(id); else state.learned.delete(id);
+      saveLearned();
+      updateProgress();
+      const card = els.wordList.querySelector(`[data-id="${id}"]`);
+      if (card) card.classList.toggle("learned", checked);
+      if (state.deck.length && state.deck[state.deckIndex]?.id === id) updateFlashLearnedButton();
+    }
+
+    function updateProgress() {
+      const count = state.learned.size;
+      const percent = Math.round((count / WORDS.length) * 100);
+      els.progressPercent.textContent = `${percent}%`;
+      els.progressFraction.textContent = `${count} / ${WORDS.length}`;
+      els.progressBar.style.width = `${percent}%`;
+      els.remainingText.textContent = count === WORDS.length ? "전부 외웠어요!" : `${WORDS.length - count}개 남음`;
+      if (!els.studyModal.classList.contains("open")) renderCurriculum();
+    }
+
+    function openStudy(customWords = null, options = {}) {
+      const filtered = Array.isArray(customWords) ? customWords : getFilteredWords();
+      if (!filtered.length) return;
+      state.deck = [...filtered];
+      state.deckIndex = 0;
+      if (state.shuffled) shuffleDeck();
+      state.studyLabel = options.title || (state.wordScope ? state.scopeLabel : "암기카드");
+      state.returnFocus = document.activeElement;
+      state.returnDay = Number.isInteger(options.returnDay) ? options.returnDay : null;
+      els.studyModal.classList.add("open");
+      els.studyModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      renderFlashcard();
+      document.querySelector("#closeStudy").focus();
+    }
+
+    function closeStudy() {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      els.studyModal.classList.remove("open");
+      els.studyModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      renderCurriculum();
+      const dayButton = state.returnDay
+        ? els.curriculumList.querySelector(`[data-day="${state.returnDay}"] .day-actions .primary`)
+        : null;
+      if (dayButton) dayButton.focus(); else if (state.returnFocus) state.returnFocus.focus();
+      state.returnDay = null;
+    }
+
+    function shuffleDeck() {
+      for (let i = state.deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [state.deck[i], state.deck[j]] = [state.deck[j], state.deck[i]];
+      }
+    }
+
+    function renderFlashcard() {
+      const word = state.deck[state.deckIndex];
+      if (!word) return;
+      els.flashcard.classList.remove("revealed");
+      els.flashcard.setAttribute("aria-label", `${word.meaning}. 정답 보기`);
+      els.flashcard.classList.remove("listening");
+      els.flashCategory.textContent = word.category;
+      els.flashNum.textContent = `#${word.id}`;
+      els.flashPrompt.textContent = "뜻을 보고 베트남어로 말해보세요";
+      els.flashMeaning.textContent = word.meaning;
+      els.flashVietnamese.textContent = word.vietnamese;
+      els.flashPron.textContent = word.pronunciation;
+      els.flashAnswerMeaning.textContent = word.meaning;
+      els.studyTitle.textContent = state.studyLabel;
+      els.studyMeta.textContent = `${state.deckIndex + 1} / ${state.deck.length}`;
+      els.revealButton.disabled = false;
+      updateFlashLearnedButton();
+    }
+
+    function revealFlashcard() {
+      els.flashcard.classList.add("revealed");
+      els.flashcard.setAttribute("aria-label", `${els.flashVietnamese.textContent}, ${els.flashPron.textContent}`);
+      els.revealButton.disabled = true;
+    }
+
+    function nextFlashcard() {
+      if (!state.deck.length) return;
+      state.deckIndex = (state.deckIndex + 1) % state.deck.length;
+      renderFlashcard();
+    }
+
+    function speakCurrentWord() {
+      const word = state.deck[state.deckIndex];
+      if (!word || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(word.vietnamese);
+      utterance.lang = "vi-VN";
+      utterance.rate = 0.82;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function updateFlashLearnedButton() {
+      const word = state.deck[state.deckIndex];
+      if (!word) return;
+      const learned = state.learned.has(word.id);
+      els.learnedButton.textContent = learned ? "외움 취소" : "외웠어요 ✓";
+      els.learnedButton.setAttribute("aria-pressed", String(learned));
+    }
+
+    els.search.addEventListener("input", event => {
+      state.query = event.target.value;
+      els.clearSearch.hidden = !state.query;
+      renderWords();
+    });
+    els.clearSearch.addEventListener("click", () => {
+      state.query = "";
+      els.search.value = "";
+      els.clearSearch.hidden = true;
+      renderWords();
+      els.search.focus();
+    });
+    els.curriculumTab.addEventListener("click", () => setView("curriculum"));
+    els.wordsTab.addEventListener("click", () => {
+      clearWordScope(false);
+      state.category = "전체";
+      state.query = "";
+      els.search.value = "";
+      els.clearSearch.hidden = true;
+      renderCategories();
+      renderWords();
+      setView("words");
+    });
+    [els.curriculumTab, els.wordsTab].forEach(tab => {
+      tab.addEventListener("keydown", event => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const nextTab = tab === els.curriculumTab ? els.wordsTab : els.curriculumTab;
+        nextTab.click();
+        nextTab.focus();
+      });
+    });
+    els.startDate.addEventListener("change", event => {
+      if (!parseLocalISO(event.target.value)) {
+        event.target.value = state.startDate;
+        return;
+      }
+      state.startDate = event.target.value;
+      saveStartDate();
+      renderCurriculum();
+    });
+    document.querySelector("#todayStartButton").addEventListener("click", () => {
+      state.startDate = toLocalISO(localToday());
+      saveStartDate();
+      renderCurriculum();
+      els.startDate.focus();
+    });
+    document.querySelector("#clearScope").addEventListener("click", () => {
+      clearWordScope();
+      els.wordsTab.focus();
+    });
+    document.querySelector("#studyButton").addEventListener("click", () => openStudy());
+    document.querySelector("#closeStudy").addEventListener("click", closeStudy);
+    document.querySelector("#nextButton").addEventListener("click", nextFlashcard);
+    els.listenButton.addEventListener("click", speakCurrentWord);
+    els.revealButton.addEventListener("click", revealFlashcard);
+    document.querySelector("#againButton").addEventListener("click", nextFlashcard);
+    els.flashcard.addEventListener("click", revealFlashcard);
+    els.learnedButton.addEventListener("click", () => {
+      const word = state.deck[state.deckIndex];
+      if (!word) return;
+      toggleLearned(word.id, !state.learned.has(word.id));
+    });
+    els.shuffleButton.addEventListener("click", () => {
+      state.shuffled = !state.shuffled;
+      els.shuffleButton.setAttribute("aria-pressed", String(state.shuffled));
+      els.shuffleButton.textContent = state.shuffled ? "섞기 켜짐" : "순서 섞기";
+      if (state.shuffled) { shuffleDeck(); state.deckIndex = 0; renderFlashcard(); }
+    });
+    els.studyModal.addEventListener("click", event => { if (event.target === els.studyModal) closeStudy(); });
+    document.addEventListener("keydown", event => {
+      if (!els.studyModal.classList.contains("open")) return;
+      if (event.target.matches("input, textarea, select")) return;
+      if (event.key === "Escape") closeStudy();
+      if (event.key === " ") { event.preventDefault(); revealFlashcard(); }
+      if (event.key === "ArrowRight") nextFlashcard();
+      if (event.key.toLowerCase() === "l" && !event.repeat) els.learnedButton.click();
+    });
+    document.querySelector("#resetButton").addEventListener("click", () => {
+      if (!state.learned.size) return;
+      if (window.confirm("외운 표시를 모두 지울까요? 이 작업은 되돌릴 수 없습니다.")) {
+        state.learned.clear();
+        saveLearned();
+        updateProgress();
+        renderWords();
+      }
+    });
+    document.querySelector("#printButton").addEventListener("click", () => window.print());
+
+    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+      els.listenButton.disabled = true;
+      els.listenButton.title = "이 브라우저에서는 음성 재생을 지원하지 않아요.";
+    }
+
+    let printState = null;
+    window.addEventListener("beforeprint", () => {
+      printState = {
+        view: state.view,
+        category: state.category,
+        query: state.query,
+        wordScope: state.wordScope,
+        scopeLabel: state.scopeLabel
+      };
+      state.wordScope = null;
+      state.scopeLabel = "";
+      state.category = "전체";
+      state.query = "";
+      setView("words");
+      renderWords();
+    });
+    window.addEventListener("afterprint", () => {
+      if (!printState) return;
+      state.category = printState.category;
+      state.query = printState.query;
+      state.wordScope = printState.wordScope;
+      state.scopeLabel = printState.scopeLabel;
+      setView(printState.view);
+      printState = null;
+      renderWords();
+    });
+
+    setView("curriculum");
+    renderCategories();
+    renderWords();
+    updateProgress();
+  </script>
+</body>
+</html>
