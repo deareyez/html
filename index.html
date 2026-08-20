@@ -97,8 +97,8 @@
       border-bottom: 1px solid rgba(220,227,222,.75);
     }
     .view-switch {
-      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px;
-      width: min(410px, 100%); margin: 0 auto; padding: 4px;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px;
+      width: min(620px, 100%); margin: 0 auto; padding: 4px;
       background: #e9eeea; border: 1px solid #d7e0da; border-radius: 14px;
     }
     .view-tab {
@@ -218,6 +218,57 @@
     .day-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 15px; }
     .day-actions .btn { flex: 1 1 118px; min-height: 40px; padding: 7px 10px; font-size: 12px; }
     .day-actions .btn.primary { flex-grow: 1.12; }
+    .sentence-head {
+      display: flex; align-items: end; justify-content: space-between; gap: 18px;
+      margin-bottom: 18px; padding: 24px; background: rgba(255,255,255,.94);
+      border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 7px 25px rgba(23,79,69,.055);
+    }
+    .sentence-head h2 { margin: 0; font-size: clamp(27px, 4vw, 36px); letter-spacing: -.05em; }
+    .sentence-head p { max-width: 720px; margin: 8px 0 0; color: var(--muted); }
+    .sentence-toolbar { display: flex; flex: 0 0 auto; gap: 8px; }
+    .sentence-toolbar .btn[aria-pressed="true"] { color: var(--green); background: var(--green-soft); border-color: #a9c8bd; }
+    .sentence-day-strip {
+      display: flex; gap: 8px; margin-bottom: 18px; padding: 3px 1px 8px;
+      overflow-x: auto; scrollbar-width: thin;
+    }
+    .sentence-day {
+      flex: 0 0 auto; min-width: 76px; min-height: 46px; padding: 7px 12px;
+      color: var(--muted); background: white; border: 1px solid var(--line);
+      border-radius: 13px; font-weight: 800; cursor: pointer;
+    }
+    .sentence-day small { display: block; margin-top: 1px; font-size: 10px; font-weight: 650; }
+    .sentence-day[aria-pressed="true"] { color: white; background: var(--green); border-color: var(--green); }
+    .sentence-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .sentence-card {
+      min-width: 0; padding: 20px; background: rgba(255,255,255,.96);
+      border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 4px 18px rgba(23,79,69,.045);
+    }
+    .sentence-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; font-weight: 780; }
+    .sentence-vietnamese {
+      margin: 13px 0 17px; color: var(--ink); font-size: clamp(20px, 3.2vw, 26px);
+      font-weight: 880; line-height: 1.35; letter-spacing: -.025em;
+    }
+    .interlinear {
+      display: flex; flex-wrap: wrap; align-items: flex-start; gap: 7px 5px;
+      padding: 13px; background: var(--paper); border: 1px solid #e8ece8; border-radius: 13px;
+    }
+    .gloss-unit { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+    .gloss-vi { color: var(--green); font-size: 14px; font-weight: 820; }
+    .gloss-ko { margin-top: 3px; color: #778681; font-size: 10px; font-weight: 650; }
+    .sentence-targets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+    .sentence-target {
+      padding: 3px 7px; color: #805c13; background: #fff5d7; border: 1px solid #efdca0;
+      border-radius: 999px; font-size: 10px; font-weight: 750;
+    }
+    .sentence-translation {
+      margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line);
+    }
+    .translation-label { display: block; margin-bottom: 3px; color: var(--red); font-size: 10px; font-weight: 850; letter-spacing: .04em; }
+    .translation-text { margin: 0; color: #334842; font-size: 15px; font-weight: 720; }
+    .translations-hidden .translation-text, .translations-hidden .gloss-ko {
+      color: transparent; background: #e3e9e5; border-radius: 4px; user-select: none;
+    }
+    .sentences-empty { padding: 60px 20px; color: var(--muted); text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); }
     .scope-banner {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       margin-bottom: 16px; padding: 11px 13px; color: var(--green); background: var(--green-soft);
@@ -337,6 +388,10 @@
       .hero { grid-template-columns: 1fr; gap: 26px; padding: 42px 0 30px; }
       .progress-card { padding: 20px; }
       .curriculum-head { grid-template-columns: 1fr; }
+      .sentence-head { align-items: stretch; flex-direction: column; }
+      .sentence-toolbar { width: 100%; }
+      .sentence-toolbar .btn { flex: 1; }
+      .sentence-grid { grid-template-columns: 1fr; }
       .day-grid { grid-template-columns: 1fr; }
       .toolbar { grid-template-columns: 1fr auto; }
       #studyButton span { display: none; }
@@ -379,7 +434,7 @@
     @media print {
       @page { margin: 12mm; }
       body { background: white; color: black; font-size: 10pt; }
-      .site-header, .toolbar-shell, .nav-actions, .progress-card, .legend, .guide, #curriculumPanel, footer, .modal, .learn-check, .scope-banner { display: none !important; }
+      .site-header, .toolbar-shell, .nav-actions, .progress-card, .legend, .guide, #curriculumPanel, #sentencesPanel, footer, .modal, .learn-check, .scope-banner { display: none !important; }
       .hero { display: block; padding: 0 0 8mm; }
       h1 { font-size: 25pt; }
       .lead { margin-top: 3mm; font-size: 10pt; }
@@ -424,6 +479,7 @@
     <div class="wrap">
       <div class="view-switch" role="tablist" aria-label="학습 화면 선택">
         <button class="view-tab" id="curriculumTab" type="button" role="tab" aria-selected="true" aria-controls="curriculumPanel">10일 커리큘럼</button>
+        <button class="view-tab" id="sentencesTab" type="button" role="tab" aria-selected="false" aria-controls="sentencesPanel" tabindex="-1">문장 연습</button>
         <button class="view-tab" id="wordsTab" type="button" role="tab" aria-selected="false" aria-controls="wordsPanel" tabindex="-1">전체 300</button>
       </div>
       <div class="word-tools" id="wordTools" hidden>
@@ -462,6 +518,22 @@
       <div id="curriculumList" aria-label="10일 학습 일정"></div>
     </section>
 
+    <section id="sentencesPanel" role="tabpanel" aria-labelledby="sentencesTab" hidden>
+      <div class="sentence-head">
+        <div>
+          <p class="section-kicker">Words in context</p>
+          <h2 id="sentencesTitle" tabindex="-1">단어를 문장으로 연결하기</h2>
+          <p>하루 단어 30개를 핵심 문장 10개로 연습합니다. 각 낱말 아래의 작은 뜻을 먼저 보고, 마지막에 자연스러운 전체 뜻을 확인하세요.</p>
+        </div>
+        <div class="sentence-toolbar">
+          <button class="btn" id="toggleSentenceMeanings" type="button" aria-pressed="false">뜻 가리기</button>
+        </div>
+      </div>
+      <nav class="sentence-day-strip" id="sentenceDayStrip" aria-label="문장 연습 날짜 선택"></nav>
+      <p class="sr-only" id="sentenceStatus" aria-live="polite"></p>
+      <div class="sentence-grid" id="sentenceList"></div>
+    </section>
+
     <section id="wordsPanel" role="tabpanel" aria-labelledby="wordsTab" hidden>
       <div class="scope-banner" id="scopeBanner" hidden>
         <span id="scopeText"></span>
@@ -470,7 +542,7 @@
       <section aria-labelledby="listTitle">
       <div class="list-head">
         <div>
-          <h2 id="listTitle">전체 표현</h2>
+          <h2 id="listTitle" tabindex="-1">전체 표현</h2>
           <p class="result-count" id="resultCount" aria-live="polite">300개 표현</p>
         </div>
         <p class="legend">외웠다면 오른쪽 체크 ✓</p>
@@ -880,6 +952,3169 @@
       category: CATEGORIES[Math.floor(index / 30)]
     }));
 
+    const SENTENCES = [
+      {
+        "day": 1,
+        "vi": "Xin chào bạn, cảm ơn bạn đã giúp tôi.",
+        "parts": [
+          [
+            "Xin chào",
+            "안녕하세요"
+          ],
+          [
+            "bạn,",
+            "당신·친구에게,"
+          ],
+          [
+            "cảm ơn",
+            "감사하다"
+          ],
+          [
+            "bạn",
+            "당신이"
+          ],
+          [
+            "đã giúp",
+            "도와주었다"
+          ],
+          [
+            "tôi.",
+            "나를."
+          ]
+        ],
+        "ko": "안녕하세요. 저를 도와줘서 고마워요.",
+        "targets": [
+          1,
+          2,
+          11,
+          13
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Xin lỗi chị, em không sao.",
+        "parts": [
+          [
+            "Xin lỗi",
+            "미안해요"
+          ],
+          [
+            "chị,",
+            "언니·누나,"
+          ],
+          [
+            "em",
+            "저는(연하)"
+          ],
+          [
+            "không sao.",
+            "괜찮아요."
+          ]
+        ],
+        "ko": "미안해요, 언니. 저는 괜찮아요.",
+        "targets": [
+          3,
+          4,
+          15,
+          16
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Dạ vâng, tôi làm được.",
+        "parts": [
+          [
+            "Dạ vâng,",
+            "네(공손하게),"
+          ],
+          [
+            "tôi",
+            "저는"
+          ],
+          [
+            "làm",
+            "하다"
+          ],
+          [
+            "được.",
+            "할 수 있어요."
+          ]
+        ],
+        "ko": "네, 저는 할 수 있어요.",
+        "targets": [
+          5,
+          6,
+          8,
+          12
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Không, bạn không được vào.",
+        "parts": [
+          [
+            "Không,",
+            "아니요,"
+          ],
+          [
+            "bạn",
+            "당신은"
+          ],
+          [
+            "không được",
+            "하면 안 돼요"
+          ],
+          [
+            "vào.",
+            "들어가다."
+          ]
+        ],
+        "ko": "아니요, 들어가면 안 돼요.",
+        "targets": [
+          7,
+          9
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Ông ơi, làm ơn giúp tôi.",
+        "parts": [
+          [
+            "Ông ơi,",
+            "어르신,"
+          ],
+          [
+            "làm ơn",
+            "부탁합니다"
+          ],
+          [
+            "giúp",
+            "도와주세요"
+          ],
+          [
+            "tôi.",
+            "저를."
+          ]
+        ],
+        "ko": "어르신, 제발 저를 도와주세요.",
+        "targets": [
+          10,
+          11,
+          17
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Chúng tôi là người Hàn Quốc, thưa bà.",
+        "parts": [
+          [
+            "Chúng tôi",
+            "저희는"
+          ],
+          [
+            "là",
+            "~입니다"
+          ],
+          [
+            "người Hàn Quốc,",
+            "한국인,"
+          ],
+          [
+            "thưa bà.",
+            "(여성 어르신께 공손히) 어르신."
+          ]
+        ],
+        "ko": "어르신, 저희는 한국인입니다.",
+        "targets": [
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Anh nói tiếng Việt, còn chị nói tiếng Anh.",
+        "parts": [
+          [
+            "Anh",
+            "연상 남성은"
+          ],
+          [
+            "nói",
+            "말하다"
+          ],
+          [
+            "tiếng Việt,",
+            "베트남어를,"
+          ],
+          [
+            "còn",
+            "한편"
+          ],
+          [
+            "chị",
+            "연상 여성은"
+          ],
+          [
+            "nói",
+            "말하다"
+          ],
+          [
+            "tiếng Anh.",
+            "영어를."
+          ]
+        ],
+        "ko": "남성분은 베트남어를 하고, 여성분은 영어를 해요.",
+        "targets": [
+          14,
+          15,
+          21,
+          22
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Tôi không hiểu; xin nói chậm lại và xin nói lại.",
+        "parts": [
+          [
+            "Tôi không hiểu;",
+            "저는 이해하지 못해요;"
+          ],
+          [
+            "xin nói chậm lại",
+            "천천히 말해 주세요"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "xin nói lại.",
+            "다시 말해 주세요."
+          ]
+        ],
+        "ko": "이해가 안 돼요. 천천히 말해 주시고 다시 말해 주세요.",
+        "targets": [
+          23,
+          24,
+          25
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Xin viết ra. Câu này đúng hay sai?",
+        "parts": [
+          [
+            "Xin viết ra.",
+            "적어 주세요."
+          ],
+          [
+            "Câu này",
+            "이 문장은"
+          ],
+          [
+            "đúng",
+            "맞다"
+          ],
+          [
+            "hay",
+            "또는"
+          ],
+          [
+            "sai?",
+            "틀리다?"
+          ]
+        ],
+        "ko": "적어 주세요. 이 문장은 맞나요, 틀리나요?",
+        "targets": [
+          26,
+          27,
+          28
+        ]
+      },
+      {
+        "day": 1,
+        "vi": "Tốt, nhưng em nhớ cẩn thận nhé.",
+        "parts": [
+          [
+            "Tốt,",
+            "좋아요,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "em",
+            "너는(연하)"
+          ],
+          [
+            "nhớ",
+            "기억하다·잊지 않다"
+          ],
+          [
+            "cẩn thận",
+            "조심하다"
+          ],
+          [
+            "nhé.",
+            "꼭·알겠지."
+          ]
+        ],
+        "ko": "좋아, 하지만 꼭 조심해.",
+        "targets": [
+          16,
+          29,
+          30
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Ai muốn ăn gì?",
+        "parts": [
+          [
+            "Ai",
+            "누가"
+          ],
+          [
+            "muốn",
+            "원하다"
+          ],
+          [
+            "ăn",
+            "먹다"
+          ],
+          [
+            "gì?",
+            "무엇을?"
+          ]
+        ],
+        "ko": "누가 무엇을 먹고 싶어요?",
+        "targets": [
+          31,
+          32,
+          42,
+          57
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Bạn ở đâu và khi nào về?",
+        "parts": [
+          [
+            "Bạn",
+            "당신은"
+          ],
+          [
+            "ở đâu",
+            "어디에 있다"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "khi nào",
+            "언제"
+          ],
+          [
+            "về?",
+            "돌아오다?"
+          ]
+        ],
+        "ko": "어디에 있고 언제 돌아와요?",
+        "targets": [
+          33,
+          34,
+          48
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Tại sao bạn cần biết tôi làm như thế nào?",
+        "parts": [
+          [
+            "Tại sao",
+            "왜"
+          ],
+          [
+            "bạn",
+            "당신은"
+          ],
+          [
+            "cần",
+            "필요하다"
+          ],
+          [
+            "biết",
+            "알다"
+          ],
+          [
+            "tôi",
+            "제가"
+          ],
+          [
+            "làm",
+            "하다"
+          ],
+          [
+            "như thế nào?",
+            "어떻게?"
+          ]
+        ],
+        "ko": "왜 제가 어떻게 하는지 알아야 하나요?",
+        "targets": [
+          35,
+          36,
+          43,
+          44
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Cái này bao nhiêu, còn cái kia bao nhiêu?",
+        "parts": [
+          [
+            "Cái này",
+            "이것은"
+          ],
+          [
+            "bao nhiêu,",
+            "얼마예요,"
+          ],
+          [
+            "còn",
+            "그렇다면"
+          ],
+          [
+            "cái kia",
+            "저것은"
+          ],
+          [
+            "bao nhiêu?",
+            "얼마예요?"
+          ]
+        ],
+        "ko": "이것은 얼마이고, 저것은 얼마예요?",
+        "targets": [
+          37,
+          38,
+          39
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Tôi có vé, còn bạn có không?",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "có",
+            "가지고 있다"
+          ],
+          [
+            "vé,",
+            "표를,"
+          ],
+          [
+            "còn",
+            "그런데"
+          ],
+          [
+            "bạn",
+            "당신은"
+          ],
+          [
+            "có không?",
+            "있어요?"
+          ]
+        ],
+        "ko": "저는 표가 있는데, 당신도 있나요?",
+        "targets": [
+          40,
+          41
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Tôi muốn tìm đường đi đến khách sạn.",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "muốn",
+            "원하다"
+          ],
+          [
+            "tìm",
+            "찾다"
+          ],
+          [
+            "đường",
+            "길을"
+          ],
+          [
+            "đi đến",
+            "~로 가는"
+          ],
+          [
+            "khách sạn.",
+            "호텔."
+          ]
+        ],
+        "ko": "호텔로 가는 길을 찾고 싶어요.",
+        "targets": [
+          42,
+          45,
+          46,
+          47
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Đi vào, dừng lại một chút rồi đi ra.",
+        "parts": [
+          [
+            "Đi vào,",
+            "들어가세요,"
+          ],
+          [
+            "dừng lại",
+            "멈추세요"
+          ],
+          [
+            "một chút",
+            "잠깐"
+          ],
+          [
+            "rồi",
+            "그런 다음"
+          ],
+          [
+            "đi ra.",
+            "나가세요."
+          ]
+        ],
+        "ko": "들어가서 잠깐 멈춘 다음 나가세요.",
+        "targets": [
+          49,
+          50,
+          51
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Chờ tôi mở cửa, rồi nhớ đóng cửa.",
+        "parts": [
+          [
+            "Chờ",
+            "기다리다"
+          ],
+          [
+            "tôi",
+            "제가"
+          ],
+          [
+            "mở",
+            "열다"
+          ],
+          [
+            "cửa,",
+            "문을,"
+          ],
+          [
+            "rồi",
+            "그런 다음"
+          ],
+          [
+            "nhớ",
+            "잊지 말고"
+          ],
+          [
+            "đóng",
+            "닫다"
+          ],
+          [
+            "cửa.",
+            "문을."
+          ]
+        ],
+        "ko": "제가 문을 열 때까지 기다렸다가, 문을 닫는 것을 잊지 마세요.",
+        "targets": [
+          52,
+          53,
+          54
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Tôi gọi bạn đến xem phim và nghe nhạc.",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "gọi",
+            "부르다·전화하다"
+          ],
+          [
+            "bạn",
+            "당신을"
+          ],
+          [
+            "đến",
+            "오게 하다"
+          ],
+          [
+            "xem phim",
+            "영화를 보다"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "nghe nhạc.",
+            "음악을 듣다."
+          ]
+        ],
+        "ko": "영화를 보고 음악을 들으러 오라고 당신에게 연락해요.",
+        "targets": [
+          47,
+          55,
+          56,
+          60
+        ]
+      },
+      {
+        "day": 2,
+        "vi": "Ăn xong, tôi uống nước rồi đi ngủ.",
+        "parts": [
+          [
+            "Ăn xong,",
+            "다 먹고 나서,"
+          ],
+          [
+            "tôi",
+            "저는"
+          ],
+          [
+            "uống nước",
+            "물을 마시다"
+          ],
+          [
+            "rồi",
+            "그런 다음"
+          ],
+          [
+            "đi ngủ.",
+            "자러 가다."
+          ]
+        ],
+        "ko": "밥을 다 먹고 물을 마신 다음 자러 가요.",
+        "targets": [
+          57,
+          58,
+          59
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Rẽ trái ở ngã tư, rồi đi thẳng.",
+        "parts": [
+          [
+            "Rẽ",
+            "돌다"
+          ],
+          [
+            "trái",
+            "왼쪽으로"
+          ],
+          [
+            "ở ngã tư,",
+            "사거리에서,"
+          ],
+          [
+            "rồi",
+            "그런 다음"
+          ],
+          [
+            "đi thẳng.",
+            "직진하세요."
+          ]
+        ],
+        "ko": "사거리에서 좌회전한 다음 직진하세요.",
+        "targets": [
+          61,
+          63,
+          73
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Bên phải khách sạn có một nhà vệ sinh.",
+        "parts": [
+          [
+            "Bên phải",
+            "오른쪽에"
+          ],
+          [
+            "khách sạn",
+            "호텔의"
+          ],
+          [
+            "có",
+            "있다"
+          ],
+          [
+            "một",
+            "하나의"
+          ],
+          [
+            "nhà vệ sinh.",
+            "화장실이."
+          ]
+        ],
+        "ko": "호텔 오른쪽에 화장실이 있어요.",
+        "targets": [
+          62,
+          80,
+          81
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Nhà ga ở phía trước, bến xe ở phía sau.",
+        "parts": [
+          [
+            "Nhà ga",
+            "기차역은"
+          ],
+          [
+            "ở phía trước,",
+            "앞에 있고,"
+          ],
+          [
+            "bến xe",
+            "버스터미널은"
+          ],
+          [
+            "ở phía sau.",
+            "뒤에 있어요."
+          ]
+        ],
+        "ko": "기차역은 앞에 있고 버스터미널은 뒤에 있어요.",
+        "targets": [
+          64,
+          65,
+          77,
+          78
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Ở đây gần sân bay nhưng xa nhà ga.",
+        "parts": [
+          [
+            "Ở đây",
+            "여기는"
+          ],
+          [
+            "gần",
+            "가깝다"
+          ],
+          [
+            "sân bay",
+            "공항과"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "xa",
+            "멀다"
+          ],
+          [
+            "nhà ga.",
+            "기차역과."
+          ]
+        ],
+        "ko": "여기는 공항에서는 가깝지만 기차역에서는 멀어요.",
+        "targets": [
+          66,
+          67,
+          70,
+          76,
+          77
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Trạm xe buýt ở bên cạnh khách sạn.",
+        "parts": [
+          [
+            "Trạm xe buýt",
+            "버스 정류장은"
+          ],
+          [
+            "ở bên cạnh",
+            "옆에 있다"
+          ],
+          [
+            "khách sạn.",
+            "호텔."
+          ]
+        ],
+        "ko": "버스 정류장은 호텔 옆에 있어요.",
+        "targets": [
+          68,
+          79,
+          80
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Khách sạn ở đó, đối diện với nhà ga.",
+        "parts": [
+          [
+            "Khách sạn",
+            "호텔은"
+          ],
+          [
+            "ở đó,",
+            "저기에 있고,"
+          ],
+          [
+            "đối diện với nhà ga.",
+            "기차역 맞은편에 있어요."
+          ]
+        ],
+        "ko": "호텔은 저기 기차역 맞은편에 있어요.",
+        "targets": [
+          69,
+          71,
+          77,
+          80
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Xem bản đồ và địa chỉ để tìm đường.",
+        "parts": [
+          [
+            "Xem",
+            "보다"
+          ],
+          [
+            "bản đồ",
+            "지도를"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "địa chỉ",
+            "주소를"
+          ],
+          [
+            "để",
+            "~하기 위해"
+          ],
+          [
+            "tìm đường.",
+            "길을 찾다."
+          ]
+        ],
+        "ko": "길을 찾으려면 지도와 주소를 확인하세요.",
+        "targets": [
+          72,
+          74,
+          75
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Tôi đi taxi hoặc ô tô đến sân bay.",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "đi",
+            "가다"
+          ],
+          [
+            "taxi",
+            "택시로"
+          ],
+          [
+            "hoặc",
+            "또는"
+          ],
+          [
+            "ô tô",
+            "자동차로"
+          ],
+          [
+            "đến",
+            "도착하다·가다"
+          ],
+          [
+            "sân bay.",
+            "공항에."
+          ]
+        ],
+        "ko": "저는 택시나 자동차를 타고 공항에 가요.",
+        "targets": [
+          76,
+          82,
+          87
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Tôi đi xe buýt, tàu hỏa hoặc tàu điện.",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "đi",
+            "타고 가다"
+          ],
+          [
+            "xe buýt,",
+            "버스,"
+          ],
+          [
+            "tàu hỏa",
+            "기차"
+          ],
+          [
+            "hoặc",
+            "또는"
+          ],
+          [
+            "tàu điện.",
+            "전철."
+          ]
+        ],
+        "ko": "저는 버스, 기차 또는 전철을 타고 가요.",
+        "targets": [
+          83,
+          84,
+          85
+        ]
+      },
+      {
+        "day": 3,
+        "vi": "Tôi đi xe máy đến nhà ga, mua vé, lên tàu rồi xuống ở ga cuối.",
+        "parts": [
+          [
+            "Tôi",
+            "저는"
+          ],
+          [
+            "đi xe máy",
+            "오토바이로 가다"
+          ],
+          [
+            "đến nhà ga,",
+            "기차역에,"
+          ],
+          [
+            "mua vé,",
+            "표를 사고,"
+          ],
+          [
+            "lên tàu",
+            "기차에 타다"
+          ],
+          [
+            "rồi",
+            "그런 다음"
+          ],
+          [
+            "xuống",
+            "내리다"
+          ],
+          [
+            "ở ga cuối.",
+            "종착역에서."
+          ]
+        ],
+        "ko": "오토바이를 타고 기차역에 가서 표를 사고, 기차에 탄 뒤 종착역에서 내려요.",
+        "targets": [
+          77,
+          86,
+          88,
+          89,
+          90
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Nhà hàng hay quán ăn nào có thực đơn tiếng Anh?",
+        "parts": [
+          [
+            "Nhà hàng",
+            "식당이나"
+          ],
+          [
+            "hay",
+            "또는"
+          ],
+          [
+            "quán ăn nào",
+            "어느 음식점에"
+          ],
+          [
+            "có",
+            "있나요"
+          ],
+          [
+            "thực đơn tiếng Anh?",
+            "영어 메뉴가?"
+          ]
+        ],
+        "ko": "어느 식당이나 음식점에 영어 메뉴가 있나요?",
+        "targets": [
+          91,
+          92,
+          93
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Món ăn này là cơm hay phở?",
+        "parts": [
+          [
+            "Món ăn này",
+            "이 요리는"
+          ],
+          [
+            "là",
+            "~인가요"
+          ],
+          [
+            "cơm",
+            "밥"
+          ],
+          [
+            "hay",
+            "아니면"
+          ],
+          [
+            "phở?",
+            "쌀국수가?"
+          ]
+        ],
+        "ko": "이 요리는 밥인가요, 아니면 쌀국수인가요?",
+        "targets": [
+          94,
+          95,
+          96
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Cho tôi một bánh mì thịt và một bát bún.",
+        "parts": [
+          [
+            "Cho tôi",
+            "저에게 주세요"
+          ],
+          [
+            "một bánh mì thịt",
+            "고기 반미 하나"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "một bát bún.",
+            "쌀국수 한 그릇"
+          ]
+        ],
+        "ko": "고기 반미 하나와 가는 쌀국수 한 그릇 주세요.",
+        "targets": [
+          97,
+          98,
+          99
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Ở đây có thịt bò, thịt gà và thịt heo không?",
+        "parts": [
+          [
+            "Ở đây",
+            "여기에"
+          ],
+          [
+            "có thịt bò,",
+            "쇠고기가 있고"
+          ],
+          [
+            "thịt gà",
+            "닭고기"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "thịt heo không?",
+            "돼지고기도 있나요?"
+          ]
+        ],
+        "ko": "여기에 쇠고기, 닭고기, 돼지고기가 있나요?",
+        "targets": [
+          100,
+          101,
+          102
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Cho tôi một món cá, một món hải sản và rau.",
+        "parts": [
+          [
+            "Cho tôi",
+            "저에게 주세요"
+          ],
+          [
+            "một món cá,",
+            "생선 요리 하나"
+          ],
+          [
+            "một món hải sản",
+            "해산물 요리 하나"
+          ],
+          [
+            "và rau.",
+            "그리고 채소"
+          ]
+        ],
+        "ko": "생선 요리 하나, 해산물 요리 하나와 채소를 주세요.",
+        "targets": [
+          103,
+          104,
+          105
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Cho tôi trái cây, một chai nước và một ly cà phê.",
+        "parts": [
+          [
+            "Cho tôi",
+            "저에게 주세요"
+          ],
+          [
+            "trái cây,",
+            "과일"
+          ],
+          [
+            "một chai nước",
+            "물 한 병"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "một ly cà phê.",
+            "커피 한 잔"
+          ]
+        ],
+        "ko": "과일과 물 한 병, 커피 한 잔 주세요.",
+        "targets": [
+          106,
+          107,
+          108
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Bạn muốn uống bia, trà hay sữa?",
+        "parts": [
+          [
+            "Bạn",
+            "당신은"
+          ],
+          [
+            "muốn uống",
+            "마시고 싶나요"
+          ],
+          [
+            "bia,",
+            "맥주"
+          ],
+          [
+            "trà",
+            "차"
+          ],
+          [
+            "hay",
+            "아니면"
+          ],
+          [
+            "sữa?",
+            "우유를?"
+          ]
+        ],
+        "ko": "맥주, 차, 우유 중 무엇을 마시고 싶어요?",
+        "targets": [
+          109,
+          110,
+          111
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Tôi muốn trà nóng, còn bạn tôi muốn cà phê lạnh có đá.",
+        "parts": [
+          [
+            "Tôi muốn",
+            "저는 원해요"
+          ],
+          [
+            "trà nóng,",
+            "뜨거운 차를"
+          ],
+          [
+            "còn",
+            "한편"
+          ],
+          [
+            "bạn tôi muốn",
+            "제 친구는 원해요"
+          ],
+          [
+            "cà phê lạnh",
+            "차가운 커피를"
+          ],
+          [
+            "có đá.",
+            "얼음을 넣은"
+          ]
+        ],
+        "ko": "저는 뜨거운 차를 원하고, 제 친구는 얼음을 넣은 차가운 커피를 원해요.",
+        "targets": [
+          112,
+          113,
+          114
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Đồ chay này cay hay ngọt?",
+        "parts": [
+          [
+            "Đồ chay này",
+            "이 채식 음식은"
+          ],
+          [
+            "cay",
+            "매운가요"
+          ],
+          [
+            "hay",
+            "아니면"
+          ],
+          [
+            "ngọt?",
+            "단가요?"
+          ]
+        ],
+        "ko": "이 채식 음식은 매운가요, 아니면 단가요?",
+        "targets": [
+          115,
+          116,
+          117
+        ]
+      },
+      {
+        "day": 4,
+        "vi": "Món này có vẻ rất ngon, nhưng tôi dị ứng với ớt. Tôi muốn món không có ớt và không cay.",
+        "parts": [
+          [
+            "Món này",
+            "이 요리는"
+          ],
+          [
+            "có vẻ rất ngon,",
+            "아주 맛있어 보여요,"
+          ],
+          [
+            "nhưng tôi",
+            "하지만 저는"
+          ],
+          [
+            "dị ứng với ớt.",
+            "고추 알레르기가 있어요."
+          ],
+          [
+            "Tôi muốn",
+            "저는 원해요"
+          ],
+          [
+            "món không có ớt và không cay.",
+            "고추가 들어가지 않고 맵지 않은 요리를."
+          ]
+        ],
+        "ko": "이 요리는 아주 맛있어 보이지만 저는 고추 알레르기가 있어요. 고추가 들어가지 않고 맵지 않은 요리를 원해요.",
+        "targets": [
+          118,
+          119,
+          120
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Cửa hàng này ở giữa chợ và siêu thị.",
+        "parts": [
+          [
+            "Cửa hàng này",
+            "이 가게는"
+          ],
+          [
+            "ở giữa",
+            "사이에 있어요"
+          ],
+          [
+            "chợ",
+            "시장"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "siêu thị.",
+            "슈퍼마켓"
+          ]
+        ],
+        "ko": "이 가게는 시장과 슈퍼마켓 사이에 있어요.",
+        "targets": [
+          121,
+          122,
+          123
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Bạn bán cái này với giá bao nhiêu? Tôi muốn mua.",
+        "parts": [
+          [
+            "Bạn",
+            "당신은"
+          ],
+          [
+            "bán cái này",
+            "이것을 팔다"
+          ],
+          [
+            "với giá bao nhiêu?",
+            "얼마에?"
+          ],
+          [
+            "Tôi muốn mua.",
+            "저는 사고 싶어요."
+          ]
+        ],
+        "ko": "이거 얼마에 파세요? 사고 싶어요.",
+        "targets": [
+          124,
+          125,
+          126
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Tôi có đủ tiền và sẽ trả hai trăm nghìn đồng bằng tiền mặt.",
+        "parts": [
+          [
+            "Tôi có đủ tiền",
+            "저는 돈이 충분하고"
+          ],
+          [
+            "và sẽ trả",
+            "지불할 거예요"
+          ],
+          [
+            "hai trăm nghìn đồng",
+            "20만 동을"
+          ],
+          [
+            "bằng tiền mặt.",
+            "현금으로"
+          ]
+        ],
+        "ko": "돈은 충분해요. 20만 동을 현금으로 낼게요.",
+        "targets": [
+          127,
+          128,
+          129
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Tôi trả bằng thẻ; cho tôi hóa đơn và biên lai nhé.",
+        "parts": [
+          [
+            "Tôi trả",
+            "저는 계산할게요"
+          ],
+          [
+            "bằng thẻ;",
+            "카드로"
+          ],
+          [
+            "cho tôi",
+            "저에게 주세요"
+          ],
+          [
+            "hóa đơn",
+            "계산서"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "biên lai nhé.",
+            "영수증을"
+          ]
+        ],
+        "ko": "카드로 계산할게요. 계산서와 영수증을 주세요.",
+        "targets": [
+          130,
+          131,
+          132
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Cái này đắt quá. Có thể giảm giá một chút không? Tôi muốn cái rẻ hơn.",
+        "parts": [
+          [
+            "Cái này",
+            "이것은"
+          ],
+          [
+            "đắt quá.",
+            "너무 비싸요."
+          ],
+          [
+            "Có thể giảm giá một chút không?",
+            "조금 할인해 줄 수 있나요?"
+          ],
+          [
+            "Tôi muốn",
+            "저는 원해요"
+          ],
+          [
+            "cái rẻ hơn.",
+            "더 싼 것을."
+          ]
+        ],
+        "ko": "이건 너무 비싸요. 조금 할인해 줄 수 있나요? 더 싼 것을 원해요.",
+        "targets": [
+          133,
+          134,
+          135
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Tôi cần kích cỡ nhỏ; ở đây có thể mặc cả không?",
+        "parts": [
+          [
+            "Tôi cần",
+            "저는 필요해요"
+          ],
+          [
+            "kích cỡ nhỏ;",
+            "작은 사이즈가"
+          ],
+          [
+            "ở đây",
+            "여기에서"
+          ],
+          [
+            "có thể",
+            "할 수 있나요"
+          ],
+          [
+            "mặc cả không?",
+            "흥정을?"
+          ]
+        ],
+        "ko": "작은 사이즈가 필요해요. 여기에서는 흥정할 수 있나요?",
+        "targets": [
+          136,
+          137,
+          138
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Tôi muốn áo kích cỡ lớn, màu đỏ.",
+        "parts": [
+          [
+            "Tôi muốn",
+            "저는 원해요"
+          ],
+          [
+            "áo",
+            "옷을"
+          ],
+          [
+            "kích cỡ lớn,",
+            "큰 사이즈의"
+          ],
+          [
+            "màu đỏ.",
+            "빨간색"
+          ]
+        ],
+        "ko": "큰 사이즈의 빨간색 옷을 원해요.",
+        "targets": [
+          139,
+          140,
+          141
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Áo này có những màu nào? Xanh dương, đen hay trắng?",
+        "parts": [
+          [
+            "Áo này",
+            "이 옷은"
+          ],
+          [
+            "có những màu nào?",
+            "어떤 색이 있나요?"
+          ],
+          [
+            "Xanh dương,",
+            "파란색,"
+          ],
+          [
+            "đen",
+            "검은색"
+          ],
+          [
+            "hay trắng?",
+            "아니면 흰색?"
+          ]
+        ],
+        "ko": "이 옷은 어떤 색이 있나요? 파란색, 검은색, 아니면 흰색인가요?",
+        "targets": [
+          142,
+          143,
+          144
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Tôi có thể thử áo này, rồi đổi hoặc trả lại nếu không vừa không?",
+        "parts": [
+          [
+            "Tôi có thể",
+            "제가 할 수 있나요"
+          ],
+          [
+            "thử áo này,",
+            "이 옷을 입어 보고"
+          ],
+          [
+            "rồi đổi",
+            "그다음 교환하거나"
+          ],
+          [
+            "hoặc trả lại",
+            "또는 반품하기를"
+          ],
+          [
+            "nếu không vừa",
+            "맞지 않으면"
+          ],
+          [
+            "không?",
+            "~할 수 있나요? (의문형)"
+          ]
+        ],
+        "ko": "이 옷을 입어 보고, 맞지 않으면 교환하거나 반품할 수 있나요?",
+        "targets": [
+          145,
+          146,
+          147
+        ]
+      },
+      {
+        "day": 5,
+        "vi": "Cửa hàng mở cửa lúc chín giờ sáng và đóng cửa lúc tám giờ tối. Sản phẩm này đang hết hàng.",
+        "parts": [
+          [
+            "Cửa hàng",
+            "가게는"
+          ],
+          [
+            "mở cửa lúc chín giờ sáng",
+            "오전 9시에 문을 열고"
+          ],
+          [
+            "và đóng cửa lúc tám giờ tối.",
+            "오후 8시에 문을 닫아요."
+          ],
+          [
+            "Sản phẩm này",
+            "이 상품은"
+          ],
+          [
+            "đang hết hàng.",
+            "현재 품절이에요."
+          ]
+        ],
+        "ko": "가게는 오전 9시에 열고 오후 8시에 닫아요. 이 상품은 현재 품절이에요.",
+        "targets": [
+          148,
+          149,
+          150
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Tôi muốn đặt phòng ở nhà nghỉ này; cho tôi xem phòng được không?",
+        "parts": [
+          [
+            "Tôi muốn",
+            "저는 원해요"
+          ],
+          [
+            "đặt phòng",
+            "방을 예약하기를"
+          ],
+          [
+            "ở nhà nghỉ này;",
+            "이 여관에서"
+          ],
+          [
+            "cho tôi xem",
+            "제가 볼 수 있게 해 주세요"
+          ],
+          [
+            "phòng được không?",
+            "방을, 괜찮을까요?"
+          ]
+        ],
+        "ko": "이 여관에서 방을 예약하고 싶어요. 방을 보여 주실 수 있나요?",
+        "targets": [
+          151,
+          152,
+          153
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Còn phòng không? Tôi muốn ở một đêm và nhận phòng ngay.",
+        "parts": [
+          [
+            "Còn phòng không?",
+            "빈방이 있나요?"
+          ],
+          [
+            "Tôi muốn ở",
+            "저는 묵고 싶어요"
+          ],
+          [
+            "một đêm",
+            "하룻밤"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "nhận phòng ngay.",
+            "지금 바로 체크인하고 싶어요"
+          ]
+        ],
+        "ko": "빈방이 있나요? 하룻밤 묵고 지금 바로 체크인하고 싶어요.",
+        "targets": [
+          154,
+          155,
+          156
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Khi trả phòng, tôi sẽ đưa chìa khóa cho lễ tân.",
+        "parts": [
+          [
+            "Khi trả phòng,",
+            "체크아웃할 때"
+          ],
+          [
+            "tôi sẽ đưa",
+            "제가 드릴게요"
+          ],
+          [
+            "chìa khóa",
+            "열쇠를"
+          ],
+          [
+            "cho lễ tân.",
+            "프런트 직원에게"
+          ]
+        ],
+        "ko": "체크아웃할 때 프런트 직원에게 열쇠를 드릴게요.",
+        "targets": [
+          157,
+          158,
+          159
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Tôi có cần xuất trình hộ chiếu và trả tiền đặt cọc không? Giá phòng có gồm bữa sáng không?",
+        "parts": [
+          [
+            "Tôi",
+            "저는 / 제가"
+          ],
+          [
+            "có cần",
+            "~할 필요가 있다"
+          ],
+          [
+            "xuất trình hộ chiếu",
+            "여권을 제시하다"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "trả tiền đặt cọc",
+            "보증금을 내다"
+          ],
+          [
+            "không?",
+            "~해야 하나요?"
+          ],
+          [
+            "Giá phòng",
+            "객실 요금"
+          ],
+          [
+            "có gồm",
+            "포함하다"
+          ],
+          [
+            "bữa sáng",
+            "아침 식사"
+          ],
+          [
+            "không?",
+            "포함되나요?"
+          ]
+        ],
+        "ko": "여권을 제시하고 보증금을 내야 하나요? 객실 요금에 아침 식사가 포함되나요?",
+        "targets": [
+          160,
+          161,
+          162
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Điều hòa có hoạt động không, và mật khẩu Wi-Fi là gì?",
+        "parts": [
+          [
+            "Điều hòa",
+            "에어컨은"
+          ],
+          [
+            "có hoạt động không,",
+            "작동하나요"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "mật khẩu Wi-Fi",
+            "와이파이 비밀번호는"
+          ],
+          [
+            "là gì?",
+            "무엇인가요?"
+          ]
+        ],
+        "ko": "에어컨은 작동하나요? 그리고 와이파이 비밀번호는 무엇인가요?",
+        "targets": [
+          163,
+          164,
+          165
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Phòng tắm có nước nóng và vòi hoa sen không?",
+        "parts": [
+          [
+            "Phòng tắm",
+            "욕실"
+          ],
+          [
+            "có",
+            "있다"
+          ],
+          [
+            "nước nóng",
+            "온수"
+          ],
+          [
+            "và",
+            "그리고 / ~와"
+          ],
+          [
+            "vòi hoa sen",
+            "샤워기"
+          ],
+          [
+            "không?",
+            "~이 있나요?"
+          ]
+        ],
+        "ko": "욕실에 온수와 샤워기가 있나요?",
+        "targets": [
+          166,
+          167,
+          168
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Cho tôi thêm khăn tắm, xà phòng và giấy vệ sinh.",
+        "parts": [
+          [
+            "Cho tôi thêm",
+            "저에게 더 주세요"
+          ],
+          [
+            "khăn tắm,",
+            "목욕 수건"
+          ],
+          [
+            "xà phòng",
+            "비누"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "giấy vệ sinh.",
+            "화장지를"
+          ]
+        ],
+        "ko": "목욕 수건과 비누, 화장지를 더 주세요.",
+        "targets": [
+          169,
+          170,
+          171
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Trên giường không có chăn và gối.",
+        "parts": [
+          [
+            "Trên giường",
+            "침대 위에"
+          ],
+          [
+            "không có",
+            "없어요"
+          ],
+          [
+            "chăn",
+            "이불"
+          ],
+          [
+            "và",
+            "그리고 / ~과"
+          ],
+          [
+            "gối.",
+            "베개가"
+          ]
+        ],
+        "ko": "침대 위에 이불과 베개가 없어요.",
+        "targets": [
+          172,
+          173,
+          174
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Phòng ở tầng năm; tôi nên đi thang máy hay cầu thang?",
+        "parts": [
+          [
+            "Phòng",
+            "방은"
+          ],
+          [
+            "ở",
+            "~에 있어요"
+          ],
+          [
+            "tầng năm;",
+            "5층"
+          ],
+          [
+            "tôi",
+            "저는"
+          ],
+          [
+            "nên đi",
+            "이용하는 게 좋을까요"
+          ],
+          [
+            "thang máy",
+            "엘리베이터"
+          ],
+          [
+            "hay",
+            "아니면"
+          ],
+          [
+            "cầu thang?",
+            "계단?"
+          ]
+        ],
+        "ko": "방은 5층에 있는데, 엘리베이터와 계단 중 어느 쪽을 이용하는 게 좋을까요?",
+        "targets": [
+          175,
+          176,
+          177
+        ]
+      },
+      {
+        "day": 6,
+        "vi": "Tôi có nhiều hành lý, nên chọn phòng đơn hay phòng đôi?",
+        "parts": [
+          [
+            "Tôi có",
+            "저는 있어요"
+          ],
+          [
+            "nhiều hành lý,",
+            "짐이 많아요"
+          ],
+          [
+            "nên chọn",
+            "그래서 골라야 하나요"
+          ],
+          [
+            "phòng đơn",
+            "1인실을"
+          ],
+          [
+            "hay",
+            "아니면"
+          ],
+          [
+            "phòng đôi?",
+            "2인실을?"
+          ]
+        ],
+        "ko": "짐이 많은데, 1인실과 2인실 중 어느 방을 골라야 하나요?",
+        "targets": [
+          178,
+          179,
+          180
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Mã của tôi gồm số không, số một và số hai.",
+        "parts": [
+          [
+            "Mã của tôi",
+            "제 코드는"
+          ],
+          [
+            "gồm",
+            "~로 이루어져 있어요"
+          ],
+          [
+            "số không,",
+            "0,"
+          ],
+          [
+            "số một",
+            "1"
+          ],
+          [
+            "và số hai.",
+            "그리고 2입니다."
+          ]
+        ],
+        "ko": "제 코드는 0, 1, 2로 이루어져 있어요.",
+        "targets": [
+          181,
+          182,
+          183
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Tôi mua ba quả táo, bốn quả cam và năm quả chuối.",
+        "parts": [
+          [
+            "Tôi mua",
+            "저는 삽니다"
+          ],
+          [
+            "ba quả táo,",
+            "사과 세 개와"
+          ],
+          [
+            "bốn quả cam",
+            "오렌지 네 개와"
+          ],
+          [
+            "và năm quả chuối.",
+            "바나나 다섯 개를."
+          ]
+        ],
+        "ko": "저는 사과 세 개, 오렌지 네 개, 바나나 다섯 개를 삽니다.",
+        "targets": [
+          184,
+          185,
+          186
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Có sáu người lớn, bảy trẻ em và tám chiếc vali.",
+        "parts": [
+          [
+            "Có",
+            "있습니다"
+          ],
+          [
+            "sáu người lớn,",
+            "어른 여섯 명과"
+          ],
+          [
+            "bảy trẻ em",
+            "어린이 일곱 명과"
+          ],
+          [
+            "và tám chiếc vali.",
+            "여행 가방 여덟 개가."
+          ]
+        ],
+        "ko": "어른 여섯 명, 어린이 일곱 명, 여행 가방 여덟 개가 있습니다.",
+        "targets": [
+          187,
+          188,
+          189
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Phòng chín có mười chiếc ghế và một trăm cuốn sách.",
+        "parts": [
+          [
+            "Phòng chín",
+            "9번 방에는"
+          ],
+          [
+            "có",
+            "있습니다"
+          ],
+          [
+            "mười chiếc ghế",
+            "의자 열 개와"
+          ],
+          [
+            "và một trăm cuốn sách.",
+            "책 백 권이."
+          ]
+        ],
+        "ko": "9번 방에는 의자 열 개와 책 백 권이 있습니다.",
+        "targets": [
+          190,
+          191,
+          192
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Đồng hồ này giá một triệu đồng, cái kia giá một trăm nghìn đồng; bây giờ là mấy giờ?",
+        "parts": [
+          [
+            "Đồng hồ này giá một triệu đồng,",
+            "이 시계는 백만 동이고,"
+          ],
+          [
+            "cái kia giá một trăm nghìn đồng;",
+            "저것은 십만 동이에요;"
+          ],
+          [
+            "bây giờ là mấy giờ?",
+            "지금 몇 시예요?"
+          ]
+        ],
+        "ko": "이 시계는 백만 동이고 저것은 십만 동이에요. 지금 몇 시예요?",
+        "targets": [
+          193,
+          194,
+          195
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Hôm nay tôi học tiếng Việt một giờ ba mươi phút.",
+        "parts": [
+          [
+            "Hôm nay",
+            "오늘"
+          ],
+          [
+            "tôi học tiếng Việt",
+            "저는 베트남어를 공부합니다"
+          ],
+          [
+            "một giờ ba mươi phút.",
+            "한 시간 삼십 분 동안."
+          ]
+        ],
+        "ko": "오늘 저는 베트남어를 한 시간 삼십 분 동안 공부합니다.",
+        "targets": [
+          196,
+          197,
+          198
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Hôm qua tôi ngủ muộn, nhưng ngày mai tôi sẽ dậy sớm vào buổi sáng.",
+        "parts": [
+          [
+            "Hôm qua",
+            "어제"
+          ],
+          [
+            "tôi ngủ muộn,",
+            "저는 늦게 잤어요,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "ngày mai",
+            "내일은"
+          ],
+          [
+            "tôi sẽ dậy sớm",
+            "일찍 일어날 거예요"
+          ],
+          [
+            "vào buổi sáng.",
+            "아침에."
+          ]
+        ],
+        "ko": "어제는 늦게 잤지만 내일 아침에는 일찍 일어날 거예요.",
+        "targets": [
+          199,
+          200,
+          201
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Buổi trưa tôi ăn phở, buổi chiều uống cà phê và buổi tối đi chợ.",
+        "parts": [
+          [
+            "Buổi trưa",
+            "점심때"
+          ],
+          [
+            "tôi ăn phở,",
+            "저는 쌀국수를 먹고,"
+          ],
+          [
+            "buổi chiều uống cà phê",
+            "오후에는 커피를 마시고"
+          ],
+          [
+            "và buổi tối đi chợ.",
+            "저녁에는 시장에 갑니다."
+          ]
+        ],
+        "ko": "점심에는 쌀국수를 먹고, 오후에는 커피를 마시고, 저녁에는 시장에 갑니다.",
+        "targets": [
+          202,
+          203,
+          204
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Bây giờ đã muộn, nhưng ngày mai tôi sẽ đến sớm.",
+        "parts": [
+          [
+            "Bây giờ",
+            "지금은"
+          ],
+          [
+            "đã muộn,",
+            "이미 늦었어요,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "ngày mai",
+            "내일은"
+          ],
+          [
+            "tôi sẽ đến sớm.",
+            "제가 일찍 올게요."
+          ]
+        ],
+        "ko": "지금은 이미 늦었지만 내일은 제가 일찍 올게요.",
+        "targets": [
+          205,
+          206,
+          207
+        ]
+      },
+      {
+        "day": 7,
+        "vi": "Bạn ở Việt Nam bao lâu, khoảng mấy ngày? Hai mươi ngày à?",
+        "parts": [
+          [
+            "Bạn ở Việt Nam",
+            "베트남에"
+          ],
+          [
+            "bao lâu,",
+            "얼마나 오래,"
+          ],
+          [
+            "khoảng mấy ngày?",
+            "대략 며칠 있어요?"
+          ],
+          [
+            "Hai mươi ngày à?",
+            "20일인가요?"
+          ]
+        ],
+        "ko": "베트남에 얼마나 오래, 대략 며칠 있어요? 20일인가요?",
+        "targets": [
+          208,
+          209,
+          210
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Gần bệnh viện có nhà thuốc, và bác sĩ đang ở đó.",
+        "parts": [
+          [
+            "Gần bệnh viện",
+            "병원 근처에"
+          ],
+          [
+            "có nhà thuốc,",
+            "약국이 있고,"
+          ],
+          [
+            "và bác sĩ",
+            "의사도"
+          ],
+          [
+            "đang ở đó.",
+            "거기에 있습니다."
+          ]
+        ],
+        "ko": "병원 근처에 약국이 있고 의사도 거기에 있습니다.",
+        "targets": [
+          211,
+          212,
+          213
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Tôi bị đau đầu, cơn đau rất dữ dội nên tôi cần thuốc.",
+        "parts": [
+          [
+            "Tôi bị đau đầu,",
+            "저는 두통이 있고,"
+          ],
+          [
+            "cơn đau",
+            "통증이"
+          ],
+          [
+            "rất dữ dội",
+            "매우 심해서"
+          ],
+          [
+            "nên",
+            "그래서"
+          ],
+          [
+            "tôi cần thuốc.",
+            "약이 필요합니다."
+          ]
+        ],
+        "ko": "저는 두통이 있고 통증이 매우 심해서 약이 필요합니다.",
+        "targets": [
+          214,
+          215,
+          216
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Con tôi bị sốt và đau bụng, còn tôi bị đau răng.",
+        "parts": [
+          [
+            "Con tôi",
+            "제 아이는"
+          ],
+          [
+            "bị sốt",
+            "열이 나고"
+          ],
+          [
+            "và đau bụng,",
+            "배가 아파요,"
+          ],
+          [
+            "còn tôi",
+            "저는"
+          ],
+          [
+            "bị đau răng.",
+            "이가 아픕니다."
+          ]
+        ],
+        "ko": "제 아이는 열이 나고 배가 아프며, 저는 이가 아픕니다.",
+        "targets": [
+          217,
+          218,
+          219
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Từ hôm qua tôi bị ho, tiêu chảy và buồn nôn.",
+        "parts": [
+          [
+            "Từ hôm qua",
+            "어제부터"
+          ],
+          [
+            "tôi bị ho,",
+            "저는 기침이 나고,"
+          ],
+          [
+            "tiêu chảy",
+            "설사를 하고"
+          ],
+          [
+            "và buồn nôn.",
+            "메스꺼워요."
+          ]
+        ],
+        "ko": "어제부터 기침과 설사가 있고 메스꺼워요.",
+        "targets": [
+          220,
+          221,
+          222
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Tôi bị chóng mặt, khó thở và tay tôi đang chảy máu.",
+        "parts": [
+          [
+            "Tôi bị chóng mặt,",
+            "저는 어지럽고,"
+          ],
+          [
+            "khó thở",
+            "숨쉬기 힘들며"
+          ],
+          [
+            "và tay tôi",
+            "손에서"
+          ],
+          [
+            "đang chảy máu.",
+            "피가 나고 있어요."
+          ]
+        ],
+        "ko": "저는 어지럽고 숨쉬기 힘들며 손에서 피가 나고 있어요.",
+        "targets": [
+          223,
+          224,
+          225
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Vết thương rất nặng; hãy gọi xe cấp cứu và đưa tôi đến phòng cấp cứu.",
+        "parts": [
+          [
+            "Vết thương",
+            "상처가"
+          ],
+          [
+            "rất nặng;",
+            "매우 심해요;"
+          ],
+          [
+            "hãy gọi xe cấp cứu",
+            "구급차를 불러 주세요"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "đưa tôi",
+            "저를 데려가 주세요"
+          ],
+          [
+            "đến phòng cấp cứu.",
+            "응급실로."
+          ]
+        ],
+        "ko": "상처가 매우 심해요. 구급차를 불러 저를 응급실로 데려가 주세요.",
+        "targets": [
+          226,
+          227,
+          228
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Cứu tôi với! Hãy gọi cảnh sát, tôi cần cảnh sát ngay.",
+        "parts": [
+          [
+            "Cứu tôi với!",
+            "살려 주세요!"
+          ],
+          [
+            "Hãy gọi cảnh sát,",
+            "경찰을 불러 주세요,"
+          ],
+          [
+            "tôi cần cảnh sát ngay.",
+            "경찰이 지금 필요해요."
+          ]
+        ],
+        "ko": "살려 주세요! 경찰을 불러 주세요. 경찰이 지금 필요해요.",
+        "targets": [
+          229,
+          230,
+          231
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Cháy rồi, rất nguy hiểm! Tôi bị mất túi trong lúc chạy ra ngoài.",
+        "parts": [
+          [
+            "Cháy rồi,",
+            "불이 났어요,"
+          ],
+          [
+            "rất nguy hiểm!",
+            "매우 위험해요!"
+          ],
+          [
+            "Tôi bị mất túi",
+            "저는 가방을 잃어버렸어요"
+          ],
+          [
+            "trong lúc chạy ra ngoài.",
+            "밖으로 달려 나오는 동안."
+          ]
+        ],
+        "ko": "불이 나서 매우 위험해요! 밖으로 달려 나오다가 가방을 잃어버렸어요.",
+        "targets": [
+          232,
+          233,
+          234
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Tôi bị mất cắp ví và thẻ bảo hiểm y tế; tôi cũng cần băng cá nhân.",
+        "parts": [
+          [
+            "Tôi bị mất cắp",
+            "저는 도난당했어요"
+          ],
+          [
+            "ví và thẻ bảo hiểm y tế;",
+            "지갑과 의료보험 카드를;"
+          ],
+          [
+            "tôi cũng cần",
+            "저는 ~도 필요해요"
+          ],
+          [
+            "băng cá nhân.",
+            "반창고도."
+          ]
+        ],
+        "ko": "지갑과 의료보험 카드를 도난당했고 반창고도 필요해요.",
+        "targets": [
+          235,
+          236,
+          237
+        ]
+      },
+      {
+        "day": 8,
+        "vi": "Tôi bị ngộ độc thực phẩm, tôi dị ứng với hải sản và cần thuốc giảm đau.",
+        "parts": [
+          [
+            "Tôi bị ngộ độc thực phẩm,",
+            "저는 식중독에 걸렸고,"
+          ],
+          [
+            "tôi dị ứng với hải sản",
+            "해산물 알레르기가 있으며"
+          ],
+          [
+            "và cần thuốc giảm đau.",
+            "진통제가 필요해요."
+          ]
+        ],
+        "ko": "저는 식중독에 걸렸고 해산물 알레르기가 있으며 진통제가 필요해요.",
+        "targets": [
+          238,
+          239,
+          240
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Điện thoại của tôi có thẻ SIM mới, nhưng tôi không nhớ số điện thoại.",
+        "parts": [
+          [
+            "Điện thoại của tôi",
+            "제 휴대전화에는"
+          ],
+          [
+            "có thẻ SIM mới,",
+            "새 유심 카드가 있고,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "tôi không nhớ",
+            "저는 기억하지 못해요"
+          ],
+          [
+            "số điện thoại.",
+            "전화번호를."
+          ]
+        ],
+        "ko": "제 휴대전화에는 새 유심 카드가 있지만 전화번호가 기억나지 않아요.",
+        "targets": [
+          241,
+          242,
+          243
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Tôi cần Internet, bộ sạc và pin dự phòng.",
+        "parts": [
+          [
+            "Tôi cần",
+            "저는 필요해요"
+          ],
+          [
+            "Internet,",
+            "인터넷과"
+          ],
+          [
+            "bộ sạc",
+            "충전기와"
+          ],
+          [
+            "và pin dự phòng.",
+            "보조 배터리가."
+          ]
+        ],
+        "ko": "저는 인터넷과 충전기, 보조 배터리가 필요해요.",
+        "targets": [
+          244,
+          245,
+          246
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Ổ cắm ở đâu? Tôi cần gọi điện và gửi tin nhắn.",
+        "parts": [
+          [
+            "Ổ cắm ở đâu?",
+            "콘센트가 어디예요?"
+          ],
+          [
+            "Tôi cần gọi điện",
+            "저는 전화해야 하고"
+          ],
+          [
+            "và gửi tin nhắn.",
+            "문자를 보내야 해요."
+          ]
+        ],
+        "ko": "콘센트가 어디예요? 저는 전화하고 문자를 보내야 해요.",
+        "targets": [
+          247,
+          248,
+          249
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Ở đây không có mạng, nên tôi không thể gọi cho người trong gia đình.",
+        "parts": [
+          [
+            "Ở đây",
+            "여기에는"
+          ],
+          [
+            "không có mạng,",
+            "인터넷이 안 돼요,"
+          ],
+          [
+            "nên",
+            "그래서"
+          ],
+          [
+            "tôi không thể gọi",
+            "저는 전화할 수 없어요"
+          ],
+          [
+            "cho người trong gia đình.",
+            "가족에게."
+          ]
+        ],
+        "ko": "여기는 인터넷이 안 돼서 가족에게 전화할 수 없어요.",
+        "targets": [
+          250,
+          251,
+          252
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Trẻ em, đàn ông và phụ nữ đều đang chờ xe buýt.",
+        "parts": [
+          [
+            "Trẻ em,",
+            "어린이들과"
+          ],
+          [
+            "đàn ông",
+            "남성들과"
+          ],
+          [
+            "và phụ nữ",
+            "여성들이"
+          ],
+          [
+            "đều đang chờ xe buýt.",
+            "모두 버스를 기다리고 있어요."
+          ]
+        ],
+        "ko": "어린이와 남성, 여성 모두 버스를 기다리고 있어요.",
+        "targets": [
+          253,
+          254,
+          255
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Nhân viên gọi tài xế và hướng dẫn viên cho chúng tôi.",
+        "parts": [
+          [
+            "Nhân viên",
+            "직원이"
+          ],
+          [
+            "gọi",
+            "부릅니다"
+          ],
+          [
+            "tài xế và hướng dẫn viên",
+            "운전기사와 가이드를"
+          ],
+          [
+            "cho chúng tôi.",
+            "우리를 위해."
+          ]
+        ],
+        "ko": "직원이 우리를 위해 운전기사와 가이드를 불러 줍니다.",
+        "targets": [
+          256,
+          257,
+          258
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Đại sứ quán và lãnh sự quán đều cảnh báo về thời tiết xấu.",
+        "parts": [
+          [
+            "Đại sứ quán",
+            "대사관과"
+          ],
+          [
+            "và lãnh sự quán",
+            "영사관이"
+          ],
+          [
+            "đều cảnh báo",
+            "모두 경고합니다"
+          ],
+          [
+            "về thời tiết xấu.",
+            "나쁜 날씨에 대해."
+          ]
+        ],
+        "ko": "대사관과 영사관 모두 나쁜 날씨를 경고합니다.",
+        "targets": [
+          259,
+          260,
+          261
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Buổi sáng có mưa, buổi chiều có nắng và buổi tối có gió.",
+        "parts": [
+          [
+            "Buổi sáng có mưa,",
+            "아침에는 비가 오고,"
+          ],
+          [
+            "buổi chiều có nắng",
+            "오후에는 햇빛이 나고"
+          ],
+          [
+            "và buổi tối có gió.",
+            "저녁에는 바람이 불어요."
+          ]
+        ],
+        "ko": "아침에는 비가 오고, 오후에는 해가 나며, 저녁에는 바람이 불어요.",
+        "targets": [
+          262,
+          263,
+          264
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Bão đang đến, trời mưa và nhiệt độ đang giảm.",
+        "parts": [
+          [
+            "Bão đang đến,",
+            "태풍이 오고 있고,"
+          ],
+          [
+            "trời mưa",
+            "비가 오며"
+          ],
+          [
+            "và nhiệt độ",
+            "기온이"
+          ],
+          [
+            "đang giảm.",
+            "내려가고 있어요."
+          ]
+        ],
+        "ko": "태풍이 오고 있고 비가 내리며 기온도 내려가고 있어요.",
+        "targets": [
+          265,
+          266,
+          267
+        ]
+      },
+      {
+        "day": 9,
+        "vi": "Phòng này ẩm, nhưng quần áo đã khô và ngoài trời nhiều mây.",
+        "parts": [
+          [
+            "Phòng này",
+            "이 방은"
+          ],
+          [
+            "ẩm,",
+            "습해요,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "quần áo đã khô",
+            "옷은 이미 말랐고"
+          ],
+          [
+            "và ngoài trời",
+            "그리고 바깥은"
+          ],
+          [
+            "nhiều mây.",
+            "구름이 많아요."
+          ]
+        ],
+        "ko": "이 방은 습하지만 옷은 이미 말랐고, 바깥은 구름이 많아요.",
+        "targets": [
+          268,
+          269,
+          270
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Thời tiết xấu, mưa nhiều nhưng ít gió.",
+        "parts": [
+          [
+            "Thời tiết xấu,",
+            "날씨가 나쁘고,"
+          ],
+          [
+            "mưa nhiều",
+            "비가 많이 와요"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "ít gió.",
+            "바람은 약해요."
+          ]
+        ],
+        "ko": "날씨가 나쁘고 비는 많이 오지만 바람은 약해요.",
+        "targets": [
+          271,
+          272,
+          273
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Tàu điện nhanh, xe buýt chậm nhưng cả hai đều sạch.",
+        "parts": [
+          [
+            "Tàu điện nhanh,",
+            "전철은 빠르고,"
+          ],
+          [
+            "xe buýt chậm",
+            "버스는 느리지만"
+          ],
+          [
+            "nhưng cả hai",
+            "둘 다"
+          ],
+          [
+            "đều sạch.",
+            "깨끗해요."
+          ]
+        ],
+        "ko": "전철은 빠르고 버스는 느리지만 둘 다 깨끗해요.",
+        "targets": [
+          274,
+          275,
+          276
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Con đường này bẩn nhưng an toàn và dễ đi.",
+        "parts": [
+          [
+            "Con đường này",
+            "이 길은"
+          ],
+          [
+            "bẩn",
+            "더러워요"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "an toàn",
+            "안전하고"
+          ],
+          [
+            "và",
+            "그리고"
+          ],
+          [
+            "dễ đi.",
+            "다니기 쉬워요."
+          ]
+        ],
+        "ko": "이 길은 더럽지만 안전하고 다니기 쉬워요.",
+        "targets": [
+          277,
+          278,
+          279
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Điện thoại mới dễ dùng, còn điện thoại cũ này rất khó dùng.",
+        "parts": [
+          [
+            "Điện thoại mới",
+            "새 휴대전화는"
+          ],
+          [
+            "dễ dùng,",
+            "사용하기 쉬워요,"
+          ],
+          [
+            "còn",
+            "반면에"
+          ],
+          [
+            "điện thoại cũ này",
+            "이 오래된 휴대전화는"
+          ],
+          [
+            "rất khó dùng.",
+            "사용하기 매우 어려워요."
+          ]
+        ],
+        "ko": "새 휴대전화는 사용하기 쉽지만 이 오래된 휴대전화는 사용하기 매우 어려워요.",
+        "targets": [
+          280,
+          281,
+          282
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Nước chưa đủ, hãy thêm một ít, nhưng đừng thêm quá nhiều.",
+        "parts": [
+          [
+            "Nước chưa đủ,",
+            "물이 아직 충분하지 않으니,"
+          ],
+          [
+            "hãy thêm một ít,",
+            "조금 더 넣어 주세요,"
+          ],
+          [
+            "nhưng đừng thêm",
+            "하지만 넣지 마세요"
+          ],
+          [
+            "quá nhiều.",
+            "너무 많이."
+          ]
+        ],
+        "ko": "물이 아직 충분하지 않으니 조금 더 넣되, 너무 많이 넣지는 마세요.",
+        "targets": [
+          283,
+          284,
+          285
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Hai phòng này rất giống nhau, nhưng giá khác.",
+        "parts": [
+          [
+            "Hai phòng này",
+            "이 두 방은"
+          ],
+          [
+            "rất giống nhau,",
+            "매우 비슷해요,"
+          ],
+          [
+            "nhưng",
+            "하지만"
+          ],
+          [
+            "giá khác.",
+            "가격은 달라요."
+          ]
+        ],
+        "ko": "이 두 방은 매우 비슷하지만 가격은 달라요.",
+        "targets": [
+          286,
+          287,
+          288
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Phòng đẹp, mọi thứ đều ổn và tôi đã sẵn sàng.",
+        "parts": [
+          [
+            "Phòng đẹp,",
+            "방은 예쁘고,"
+          ],
+          [
+            "mọi thứ đều ổn",
+            "모든 것이 괜찮으며"
+          ],
+          [
+            "và tôi đã sẵn sàng.",
+            "저는 준비됐어요."
+          ]
+        ],
+        "ko": "방은 예쁘고 모든 것이 괜찮으며 저는 준비됐어요.",
+        "targets": [
+          289,
+          290,
+          291
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Xin lỗi, hôm nay tôi bận. Vé vào cửa miễn phí, bạn cứ đi nhé. Tạm biệt!",
+        "parts": [
+          [
+            "Xin lỗi,",
+            "미안해요,"
+          ],
+          [
+            "hôm nay tôi bận.",
+            "오늘 저는 바빠요."
+          ],
+          [
+            "Vé vào cửa miễn phí,",
+            "입장료는 무료이니,"
+          ],
+          [
+            "bạn cứ đi nhé.",
+            "당신은 다녀오세요."
+          ],
+          [
+            "Tạm biệt!",
+            "안녕!"
+          ]
+        ],
+        "ko": "미안해요, 오늘 저는 바빠요. 입장료는 무료이니 당신은 다녀오세요. 안녕!",
+        "targets": [
+          292,
+          293,
+          294
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Không có gì. Rất vui được gặp bạn và chúc may mắn!",
+        "parts": [
+          [
+            "Không có gì.",
+            "천만에요."
+          ],
+          [
+            "Rất vui được gặp bạn",
+            "만나서 반가워요"
+          ],
+          [
+            "và chúc may mắn!",
+            "그리고 행운을 빌어요!"
+          ]
+        ],
+        "ko": "천만에요. 만나서 반갑고 행운을 빌어요!",
+        "targets": [
+          295,
+          296,
+          297
+        ]
+      },
+      {
+        "day": 10,
+        "vi": "Món đồ này đắt quá, bớt được không? Nếu bớt được thì tôi sẽ mua. Làm ơn tính tiền.",
+        "parts": [
+          [
+            "Món đồ này",
+            "이 물건은"
+          ],
+          [
+            "đắt quá,",
+            "너무 비싼데,"
+          ],
+          [
+            "bớt được không?",
+            "좀 깎아 주실 수 있나요?"
+          ],
+          [
+            "Nếu bớt được thì",
+            "깎아 주시면"
+          ],
+          [
+            "tôi sẽ mua.",
+            "살게요."
+          ],
+          [
+            "Làm ơn tính tiền.",
+            "계산해 주세요."
+          ]
+        ],
+        "ko": "이 물건은 너무 비싼데 좀 깎아 주실 수 있나요? 깎아 주시면 살게요. 계산해 주세요.",
+        "targets": [
+          298,
+          299,
+          300
+        ]
+      }
+    ];
+
     const STORAGE_KEY = "viet300-learned-v1";
     const START_DATE_KEY = "viet300-start-date-v1";
     const COURSE_DAYS = 10;
@@ -891,6 +4126,8 @@
       query: "",
       wordScope: null,
       scopeLabel: "",
+      sentenceDay: null,
+      hideSentenceMeanings: false,
       startDate: loadStartDate(),
       learned: loadLearned(),
       deck: [],
@@ -903,13 +4140,20 @@
 
     const els = {
       curriculumTab: document.querySelector("#curriculumTab"),
+      sentencesTab: document.querySelector("#sentencesTab"),
       wordsTab: document.querySelector("#wordsTab"),
       curriculumPanel: document.querySelector("#curriculumPanel"),
+      sentencesPanel: document.querySelector("#sentencesPanel"),
       wordsPanel: document.querySelector("#wordsPanel"),
       wordTools: document.querySelector("#wordTools"),
       curriculumList: document.querySelector("#curriculumList"),
       scheduleSummary: document.querySelector("#scheduleSummary"),
       startDate: document.querySelector("#startDate"),
+      sentenceDayStrip: document.querySelector("#sentenceDayStrip"),
+      sentenceList: document.querySelector("#sentenceList"),
+      sentencesTitle: document.querySelector("#sentencesTitle"),
+      sentenceStatus: document.querySelector("#sentenceStatus"),
+      toggleSentenceMeanings: document.querySelector("#toggleSentenceMeanings"),
       categoryStrip: document.querySelector("#categoryStrip"),
       search: document.querySelector("#search"),
       clearSearch: document.querySelector("#clearSearch"),
@@ -1015,13 +4259,18 @@
     function setView(view) {
       state.view = view;
       const curriculumActive = view === "curriculum";
+      const sentencesActive = view === "sentences";
+      const wordsActive = view === "words";
       els.curriculumPanel.hidden = !curriculumActive;
-      els.wordsPanel.hidden = curriculumActive;
-      els.wordTools.hidden = curriculumActive;
+      els.sentencesPanel.hidden = !sentencesActive;
+      els.wordsPanel.hidden = !wordsActive;
+      els.wordTools.hidden = !wordsActive;
       els.curriculumTab.setAttribute("aria-selected", String(curriculumActive));
-      els.wordsTab.setAttribute("aria-selected", String(!curriculumActive));
+      els.sentencesTab.setAttribute("aria-selected", String(sentencesActive));
+      els.wordsTab.setAttribute("aria-selected", String(wordsActive));
       els.curriculumTab.tabIndex = curriculumActive ? 0 : -1;
-      els.wordsTab.tabIndex = curriculumActive ? -1 : 0;
+      els.sentencesTab.tabIndex = sentencesActive ? 0 : -1;
+      els.wordsTab.tabIndex = wordsActive ? 0 : -1;
     }
 
     function normalize(text) {
@@ -1073,6 +4322,127 @@
     function getReviewDue(dayNumber) {
       return REVIEW_OFFSETS.map(offset => ({ day: dayNumber - offset, offset }))
         .filter(item => item.day >= 1);
+    }
+
+    function getCurrentCourseDay() {
+      const startDate = parseLocalISO(state.startDate) || localToday();
+      const offset = calendarDifference(startDate, localToday());
+      return Math.min(COURSE_DAYS, Math.max(1, offset + 1));
+    }
+
+    function renderSentenceDays() {
+      const startDate = parseLocalISO(state.startDate) || localToday();
+      els.sentenceDayStrip.replaceChildren();
+      for (let day = 1; day <= COURSE_DAYS; day += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "sentence-day";
+        button.setAttribute("aria-pressed", String(day === state.sentenceDay));
+        button.setAttribute("aria-label", `Day ${day} ${CATEGORIES[day - 1]} 문장 10개`);
+        const label = document.createElement("span");
+        label.textContent = `DAY ${day}`;
+        const date = document.createElement("small");
+        date.textContent = formatScheduleDate(addDays(startDate, day - 1));
+        button.append(label, date);
+        button.addEventListener("click", () => {
+          state.sentenceDay = day;
+          renderSentenceDays();
+          renderSentences();
+        });
+        els.sentenceDayStrip.append(button);
+      }
+    }
+
+    function createSentenceCard(sentence, index) {
+      const card = document.createElement("article");
+      card.className = "sentence-card";
+
+      const meta = document.createElement("div");
+      meta.className = "sentence-meta";
+      const number = document.createElement("span");
+      number.textContent = `DAY ${sentence.day} · 문장 ${index + 1}`;
+      const category = document.createElement("span");
+      category.textContent = CATEGORIES[sentence.day - 1];
+      meta.append(number, category);
+
+      const vietnamese = document.createElement("p");
+      vietnamese.className = "sentence-vietnamese";
+      vietnamese.lang = "vi";
+      vietnamese.textContent = sentence.vi;
+
+      const interlinear = document.createElement("div");
+      interlinear.className = "interlinear";
+      interlinear.setAttribute("aria-label", "낱말별 뜻");
+      sentence.parts.forEach(([vi, ko]) => {
+        const unit = document.createElement("span");
+        unit.className = "gloss-unit";
+        const viText = document.createElement("span");
+        viText.className = "gloss-vi";
+        viText.lang = "vi";
+        viText.textContent = vi;
+        const koText = document.createElement("small");
+        koText.className = "gloss-ko";
+        koText.textContent = ko;
+        koText.setAttribute("aria-hidden", String(state.hideSentenceMeanings));
+        unit.append(viText, koText);
+        interlinear.append(unit);
+      });
+
+      const targets = document.createElement("div");
+      targets.className = "sentence-targets";
+      targets.setAttribute("aria-label", "이 문장에 들어간 오늘의 단어");
+      sentence.targets.forEach(id => {
+        const word = WORDS[id - 1];
+        if (!word) return;
+        const chip = document.createElement("span");
+        chip.className = "sentence-target";
+        chip.textContent = `#${id} ${word.vietnamese}`;
+        targets.append(chip);
+      });
+
+      const translation = document.createElement("div");
+      translation.className = "sentence-translation";
+      const translationLabel = document.createElement("span");
+      translationLabel.className = "translation-label";
+      translationLabel.textContent = "전체 뜻";
+      const translationText = document.createElement("p");
+      translationText.className = "translation-text";
+      translationText.textContent = sentence.ko;
+      translationText.setAttribute("aria-hidden", String(state.hideSentenceMeanings));
+      translation.append(translationLabel, translationText);
+
+      card.append(meta, vietnamese, interlinear, targets, translation);
+      return card;
+    }
+
+    function renderSentences() {
+      const sentences = SENTENCES.filter(sentence => sentence.day === state.sentenceDay);
+      els.sentenceList.replaceChildren();
+      els.sentenceList.classList.toggle("translations-hidden", state.hideSentenceMeanings);
+      els.toggleSentenceMeanings.setAttribute("aria-pressed", String(state.hideSentenceMeanings));
+      els.toggleSentenceMeanings.textContent = "뜻 가리기";
+      els.sentenceStatus.textContent = `Day ${state.sentenceDay} 문장 ${sentences.length}개 표시`;
+      if (!sentences.length) {
+        const empty = document.createElement("div");
+        empty.className = "sentences-empty";
+        empty.textContent = "이 날짜의 문장을 준비하고 있어요.";
+        els.sentenceList.append(empty);
+        return;
+      }
+      const fragment = document.createDocumentFragment();
+      sentences.forEach((sentence, index) => fragment.append(createSentenceCard(sentence, index)));
+      els.sentenceList.append(fragment);
+    }
+
+    function showDaySentences(dayNumber) {
+      state.sentenceDay = dayNumber;
+      renderSentenceDays();
+      renderSentences();
+      setView("sentences");
+      requestAnimationFrame(() => {
+        els.sentencesPanel.scrollIntoView({ block: "start" });
+        els.sentencesTitle.focus({ preventScroll: true });
+      });
     }
 
     function renderCurriculum() {
@@ -1199,7 +4569,13 @@
           title: `Day ${dayNumber} · ${CATEGORIES[dayNumber - 1]}`,
           returnDay: dayNumber
         }));
-        actions.append(viewButton, studyButton);
+        const sentenceButton = document.createElement("button");
+        sentenceButton.type = "button";
+        sentenceButton.className = "btn";
+        sentenceButton.textContent = "문장 10개 연습";
+        sentenceButton.setAttribute("aria-label", `Day ${dayNumber} 핵심 문장 10개 연습`);
+        sentenceButton.addEventListener("click", () => showDaySentences(dayNumber));
+        actions.append(viewButton, sentenceButton, studyButton);
 
         card.append(top, title, task, progress, review, actions);
         grid.append(card);
@@ -1220,7 +4596,10 @@
       renderCategories();
       renderWords();
       setView("words");
-      requestAnimationFrame(() => els.wordsPanel.scrollIntoView({ block: "start" }));
+      requestAnimationFrame(() => {
+        els.wordsPanel.scrollIntoView({ block: "start" });
+        els.listTitle.focus({ preventScroll: true });
+      });
     }
 
     function clearWordScope(render = true) {
@@ -1425,6 +4804,12 @@
       els.search.focus();
     });
     els.curriculumTab.addEventListener("click", () => setView("curriculum"));
+    els.sentencesTab.addEventListener("click", () => {
+      if (!state.sentenceDay) state.sentenceDay = getCurrentCourseDay();
+      renderSentenceDays();
+      renderSentences();
+      setView("sentences");
+    });
     els.wordsTab.addEventListener("click", () => {
       clearWordScope(false);
       state.category = "전체";
@@ -1435,14 +4820,20 @@
       renderWords();
       setView("words");
     });
-    [els.curriculumTab, els.wordsTab].forEach(tab => {
+    const viewTabs = [els.curriculumTab, els.sentencesTab, els.wordsTab];
+    viewTabs.forEach((tab, index) => {
       tab.addEventListener("keydown", event => {
         if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
         event.preventDefault();
-        const nextTab = tab === els.curriculumTab ? els.wordsTab : els.curriculumTab;
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const nextTab = viewTabs[(index + direction + viewTabs.length) % viewTabs.length];
         nextTab.click();
         nextTab.focus();
       });
+    });
+    els.toggleSentenceMeanings.addEventListener("click", () => {
+      state.hideSentenceMeanings = !state.hideSentenceMeanings;
+      renderSentences();
     });
     els.startDate.addEventListener("change", event => {
       if (!parseLocalISO(event.target.value)) {
@@ -1452,11 +4843,13 @@
       state.startDate = event.target.value;
       saveStartDate();
       renderCurriculum();
+      renderSentenceDays();
     });
     document.querySelector("#todayStartButton").addEventListener("click", () => {
       state.startDate = toLocalISO(localToday());
       saveStartDate();
       renderCurriculum();
+      renderSentenceDays();
       els.startDate.focus();
     });
     document.querySelector("#clearScope").addEventListener("click", () => {
@@ -1533,8 +4926,11 @@
       renderWords();
     });
 
+    state.sentenceDay = getCurrentCourseDay();
     setView("curriculum");
     renderCategories();
+    renderSentenceDays();
+    renderSentences();
     renderWords();
     updateProgress();
   </script>
