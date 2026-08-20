@@ -57,6 +57,7 @@
       background: rgba(255,255,255,.84); font-weight: 750; cursor: pointer; transition: .18s ease;
     }
     .btn:hover { transform: translateY(-1px); border-color: #adc2ba; box-shadow: 0 6px 16px rgba(23,79,69,.08); }
+    .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
     .btn:focus-visible, .chip:focus-visible, input:focus-visible, .learn-check:focus-within {
       outline: 3px solid rgba(213,164,58,.52); outline-offset: 2px;
     }
@@ -243,11 +244,16 @@
       min-width: 0; padding: 20px; background: rgba(255,255,255,.96);
       border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 4px 18px rgba(23,79,69,.045);
     }
-    .sentence-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; font-weight: 780; }
+    .sentence-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; font-weight: 780; }
+    .sentence-meta-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+    .sentence-phrase-row { display: flex; align-items: flex-start; gap: 10px; margin: 13px 0 17px; }
     .sentence-vietnamese {
-      margin: 13px 0 17px; color: var(--ink); font-size: clamp(20px, 3.2vw, 26px);
+      flex: 1; min-width: 0; margin: 0; color: var(--ink); font-size: clamp(20px, 3.2vw, 26px);
       font-weight: 880; line-height: 1.35; letter-spacing: -.025em;
     }
+    .sentence-speech-controls { display: flex; flex: 0 0 auto; gap: 6px; }
+    .sentence-listen { min-height: 44px; padding: 7px 10px; font-size: 11px; white-space: nowrap; }
+    .sentence-listen[aria-busy="true"] { color: var(--green); background: var(--green-soft); border-color: #a9c8bd; }
     .interlinear {
       display: flex; flex-wrap: wrap; align-items: flex-start; gap: 7px 5px;
       padding: 13px; background: var(--paper); border: 1px solid #e8ece8; border-radius: 13px;
@@ -255,11 +261,16 @@
     .gloss-unit { display: inline-flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
     .gloss-vi { color: var(--green); font-size: 14px; font-weight: 820; }
     .gloss-ko { margin-top: 3px; color: #778681; font-size: 10px; font-weight: 650; }
-    .sentence-targets { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+    .sentence-targets { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+    .sentence-targets-label { flex-basis: 100%; color: var(--muted); font-size: 10px; font-weight: 820; letter-spacing: .03em; }
     .sentence-target {
-      padding: 3px 7px; color: #805c13; background: #fff5d7; border: 1px solid #efdca0;
-      border-radius: 999px; font-size: 10px; font-weight: 750;
+      display: inline-flex; flex-direction: column; align-items: flex-start; padding: 6px 9px;
+      color: #805c13; background: #fff5d7; border: 1px solid #efdca0;
+      border-radius: 11px; font-size: 10px; font-weight: 750;
     }
+    .sentence-target-main { display: block; }
+    .sentence-target-word { font-weight: 850; }
+    .sentence-target-pron { display: block; margin-top: 2px; color: #61736d; font-size: 10px; font-weight: 680; }
     .sentence-translation {
       margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--line);
     }
@@ -416,6 +427,11 @@
       .phase-head { align-items: start; }
       .phase-count { display: none; }
       .day-card { padding: 16px; }
+      .sentence-meta { align-items: flex-start; }
+      .sentence-meta-actions { align-items: flex-end; flex-direction: column; gap: 5px; }
+      .sentence-phrase-row { flex-direction: column; }
+      .sentence-speech-controls { width: 100%; }
+      .sentence-listen { flex: 1; }
       .scope-banner { align-items: start; flex-direction: column; }
       .list-head { align-items: start; }
       .legend { display: none; }
@@ -523,7 +539,7 @@
         <div>
           <p class="section-kicker">Words in context</p>
           <h2 id="sentencesTitle" tabindex="-1">단어를 문장으로 연결하기</h2>
-          <p>하루 단어 30개를 핵심 문장 10개로 연습합니다. 각 낱말 아래의 작은 뜻을 먼저 보고, 마지막에 자연스러운 전체 뜻을 확인하세요.</p>
+          <p>하루 단어 30개를 핵심 문장 10개로 연습합니다. 문장은 보통·느린 속도로 듣고, 노란 단어표에서 한글 읽기 힌트를 확인하세요. 음성은 기기 환경에 따라 다를 수 있어요.</p>
         </div>
         <div class="sentence-toolbar">
           <button class="btn" id="toggleSentenceMeanings" type="button" aria-pressed="false">뜻 가리기</button>
@@ -579,7 +595,7 @@
               <li>뜻을 가리고 회상하기 <strong>7분</strong></li>
               <li>문장 틀에 끼워 말하기 <strong>3분</strong></li>
             </ol>
-            <p class="notice"><strong>발음 안내</strong><br>한글 표기는 북부 표준 발음에 가까운 읽기 힌트입니다. 성조는 베트남어 철자와 원어민 음성을 함께 확인하세요.</p>
+            <p class="notice"><strong>발음 안내</strong><br>한글 표기는 북부 표준 발음에 가까운 읽기 힌트입니다. 성조는 발음 듣기와 베트남어 철자를 함께 확인하세요. 음성은 기기·브라우저의 베트남어 음성을 사용해 환경에 따라 다를 수 있습니다.</p>
           </div>
         </details>
         <details class="plan-card">
@@ -596,6 +612,8 @@
       </section>
     </section>
   </main>
+
+  <p class="sr-only" id="speechStatus" aria-live="polite" aria-atomic="true"></p>
 
   <footer>
     <div class="wrap footer-inner"><span>베트남어 생존회화 300</span><span>10일 완주 · 복습 간격: 1일 → 3일 → 7일</span></div>
@@ -4153,6 +4171,7 @@
       sentenceList: document.querySelector("#sentenceList"),
       sentencesTitle: document.querySelector("#sentencesTitle"),
       sentenceStatus: document.querySelector("#sentenceStatus"),
+      speechStatus: document.querySelector("#speechStatus"),
       toggleSentenceMeanings: document.querySelector("#toggleSentenceMeanings"),
       categoryStrip: document.querySelector("#categoryStrip"),
       search: document.querySelector("#search"),
@@ -4183,6 +4202,107 @@
       shuffleButton: document.querySelector("#shuffleButton"),
       listenButton: document.querySelector("#listenButton")
     };
+
+    const SPEECH_SUPPORTED = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+    let vietnameseVoice = null;
+    let speechVoicesResolved = false;
+    let activeUtterance = null;
+    let activeSpeechButton = null;
+
+    function canSpeakVietnamese() {
+      return SPEECH_SUPPORTED && (!speechVoicesResolved || Boolean(vietnameseVoice));
+    }
+
+    function resetSpeechButton(button) {
+      if (!button) return;
+      button.textContent = button.dataset.idleLabel || "발음 듣기";
+      if (button.dataset.idleAriaLabel) button.setAttribute("aria-label", button.dataset.idleAriaLabel);
+      else button.removeAttribute("aria-label");
+      button.removeAttribute("aria-busy");
+    }
+
+    function configureSpeechButton(button) {
+      button.dataset.vietnameseSpeech = "true";
+      button.dataset.idleLabel ||= button.textContent;
+      if (!("idleAriaLabel" in button.dataset)) {
+        button.dataset.idleAriaLabel = button.getAttribute("aria-label") || "";
+      }
+      const enabled = canSpeakVietnamese();
+      button.disabled = !enabled;
+      button.title = enabled
+        ? "기기의 베트남어 음성으로 재생합니다."
+        : "이 기기에서 사용할 수 있는 베트남어 음성을 찾지 못했어요.";
+    }
+
+    function updateSpeechAvailability() {
+      document.querySelectorAll("[data-vietnamese-speech]").forEach(configureSpeechButton);
+    }
+
+    function refreshVietnameseVoice() {
+      if (!SPEECH_SUPPORTED) return;
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length) {
+        speechVoicesResolved = true;
+        vietnameseVoice = voices.find(voice => /^vi(?:[-_]|$)/i.test(voice.lang)) || null;
+      }
+      updateSpeechAvailability();
+    }
+
+    function stopVietnameseSpeech(message = "") {
+      const wasPlaying = Boolean(activeUtterance);
+      const previousButton = activeSpeechButton;
+      activeUtterance = null;
+      activeSpeechButton = null;
+      if (SPEECH_SUPPORTED) window.speechSynthesis.cancel();
+      resetSpeechButton(previousButton);
+      if (message) els.speechStatus.textContent = message;
+      else if (wasPlaying) els.speechStatus.textContent = "발음 재생을 멈췄습니다.";
+    }
+
+    function speakVietnamese(text, button, label, rate = 0.82) {
+      refreshVietnameseVoice();
+      if (!canSpeakVietnamese()) {
+        configureSpeechButton(button);
+        els.speechStatus.textContent = "이 기기에서 사용할 수 있는 베트남어 음성을 찾지 못했어요.";
+        return;
+      }
+      if (activeSpeechButton === button && activeUtterance) {
+        stopVietnameseSpeech(`${label} 발음 재생을 멈췄습니다.`);
+        return;
+      }
+
+      stopVietnameseSpeech();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "vi-VN";
+      utterance.rate = rate;
+      if (vietnameseVoice) utterance.voice = vietnameseVoice;
+      activeUtterance = utterance;
+      activeSpeechButton = button;
+      button.textContent = "중지";
+      button.setAttribute("aria-label", `${label} 발음 재생 중지`);
+      button.setAttribute("aria-busy", "true");
+      els.speechStatus.textContent = `${label} 발음을 재생합니다.`;
+
+      utterance.onend = () => {
+        if (activeUtterance !== utterance) return;
+        activeUtterance = null;
+        activeSpeechButton = null;
+        resetSpeechButton(button);
+        els.speechStatus.textContent = `${label} 발음 재생이 끝났습니다.`;
+      };
+      utterance.onerror = () => {
+        if (activeUtterance !== utterance) return;
+        activeUtterance = null;
+        activeSpeechButton = null;
+        resetSpeechButton(button);
+        els.speechStatus.textContent = "기기의 베트남어 음성을 재생하지 못했어요.";
+      };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    if (SPEECH_SUPPORTED && "addEventListener" in window.speechSynthesis) {
+      window.speechSynthesis.addEventListener("voiceschanged", refreshVietnameseVoice);
+    }
 
     function loadLearned() {
       try {
@@ -4257,6 +4377,7 @@
     }
 
     function setView(view) {
+      if (state.view !== view) stopVietnameseSpeech();
       state.view = view;
       const curriculumActive = view === "curriculum";
       const sentencesActive = view === "sentences";
@@ -4363,12 +4484,37 @@
       number.textContent = `DAY ${sentence.day} · 문장 ${index + 1}`;
       const category = document.createElement("span");
       category.textContent = CATEGORIES[sentence.day - 1];
-      meta.append(number, category);
+      const metaActions = document.createElement("span");
+      metaActions.className = "sentence-meta-actions";
+      metaActions.append(category);
+      meta.append(number, metaActions);
 
       const vietnamese = document.createElement("p");
       vietnamese.className = "sentence-vietnamese";
       vietnamese.lang = "vi";
       vietnamese.textContent = sentence.vi;
+
+      const speechControls = document.createElement("div");
+      speechControls.className = "sentence-speech-controls";
+      const makeListenButton = (label, rate, speedLabel) => {
+        const button = document.createElement("button");
+        button.className = "btn sentence-listen";
+        button.type = "button";
+        button.textContent = label;
+        button.setAttribute("aria-label", `Day ${sentence.day} 문장 ${index + 1} ${speedLabel} 베트남어 발음 듣기`);
+        configureSpeechButton(button);
+        button.addEventListener("click", () => {
+          speakVietnamese(sentence.vi, button, `Day ${sentence.day} 문장 ${index + 1}`, rate);
+        });
+        return button;
+      };
+      speechControls.append(
+        makeListenButton("발음 듣기", 0.88, "보통 속도"),
+        makeListenButton("느리게", 0.68, "느린 속도")
+      );
+      const phraseRow = document.createElement("div");
+      phraseRow.className = "sentence-phrase-row";
+      phraseRow.append(vietnamese, speechControls);
 
       const interlinear = document.createElement("div");
       interlinear.className = "interlinear";
@@ -4390,13 +4536,28 @@
 
       const targets = document.createElement("div");
       targets.className = "sentence-targets";
-      targets.setAttribute("aria-label", "이 문장에 들어간 오늘의 단어");
+      targets.setAttribute("aria-label", "이 문장에 들어간 오늘의 단어와 한글 읽기 힌트");
+      const targetsLabel = document.createElement("span");
+      targetsLabel.className = "sentence-targets-label";
+      targetsLabel.textContent = "오늘 단어 · 한글 읽기 힌트";
+      targets.append(targetsLabel);
       sentence.targets.forEach(id => {
         const word = WORDS[id - 1];
         if (!word) return;
         const chip = document.createElement("span");
         chip.className = "sentence-target";
-        chip.textContent = `#${id} ${word.vietnamese}`;
+        const main = document.createElement("span");
+        main.className = "sentence-target-main";
+        main.append(document.createTextNode(`#${id} `));
+        const wordText = document.createElement("span");
+        wordText.className = "sentence-target-word";
+        wordText.lang = "vi";
+        wordText.textContent = word.vietnamese;
+        main.append(wordText);
+        const pronunciation = document.createElement("small");
+        pronunciation.className = "sentence-target-pron";
+        pronunciation.textContent = word.pronunciation;
+        chip.append(main, pronunciation);
         targets.append(chip);
       });
 
@@ -4411,11 +4572,12 @@
       translationText.setAttribute("aria-hidden", String(state.hideSentenceMeanings));
       translation.append(translationLabel, translationText);
 
-      card.append(meta, vietnamese, interlinear, targets, translation);
+      card.append(meta, phraseRow, interlinear, targets, translation);
       return card;
     }
 
     function renderSentences() {
+      stopVietnameseSpeech();
       const sentences = SENTENCES.filter(sentence => sentence.day === state.sentenceDay);
       els.sentenceList.replaceChildren();
       els.sentenceList.classList.toggle("translations-hidden", state.hideSentenceMeanings);
@@ -4709,6 +4871,7 @@
     function openStudy(customWords = null, options = {}) {
       const filtered = Array.isArray(customWords) ? customWords : getFilteredWords();
       if (!filtered.length) return;
+      stopVietnameseSpeech();
       state.deck = [...filtered];
       state.deckIndex = 0;
       if (state.shuffled) shuffleDeck();
@@ -4723,7 +4886,7 @@
     }
 
     function closeStudy() {
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      stopVietnameseSpeech();
       els.studyModal.classList.remove("open");
       els.studyModal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
@@ -4743,6 +4906,7 @@
     }
 
     function renderFlashcard() {
+      stopVietnameseSpeech();
       const word = state.deck[state.deckIndex];
       if (!word) return;
       els.flashcard.classList.remove("revealed");
@@ -4775,12 +4939,8 @@
 
     function speakCurrentWord() {
       const word = state.deck[state.deckIndex];
-      if (!word || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(word.vietnamese);
-      utterance.lang = "vi-VN";
-      utterance.rate = 0.82;
-      window.speechSynthesis.speak(utterance);
+      if (!word) return;
+      speakVietnamese(word.vietnamese, els.listenButton, `#${word.id} ${word.vietnamese}`, 0.82);
     }
 
     function updateFlashLearnedButton() {
@@ -4894,13 +5054,11 @@
     });
     document.querySelector("#printButton").addEventListener("click", () => window.print());
 
-    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
-      els.listenButton.disabled = true;
-      els.listenButton.title = "이 브라우저에서는 음성 재생을 지원하지 않아요.";
-    }
+    configureSpeechButton(els.listenButton);
 
     let printState = null;
     window.addEventListener("beforeprint", () => {
+      stopVietnameseSpeech();
       printState = {
         view: state.view,
         category: state.category,
@@ -4933,6 +5091,7 @@
     renderSentences();
     renderWords();
     updateProgress();
+    refreshVietnameseVoice();
   </script>
 </body>
 </html>
