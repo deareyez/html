@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 620" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">서로 연결되는 두 개의 구조</title>
+  <desc id="desc">좌표 그리드 위에서 초록색과 주황색의 기하학적 리본이 만나 하나의 열린 구조를 이룹니다.</desc>
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="0.8" fill="#214b37" fill-opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect x="24" y="24" width="592" height="572" fill="url(#dots)"/>
+  <g stroke="#214b37" stroke-opacity=".22" stroke-width="1" stroke-dasharray="3 6">
+    <path d="M74 88H571M74 506H571M100 57V552M540 57V552"/>
+    <path d="M66 436 558 152M86 178 572 459"/>
+  </g>
+  <g stroke="#214b37" stroke-opacity=".4" stroke-width="1">
+    <path d="M94 88h12m-6-6v12M534 88h12m-6-6v12M94 506h12m-6-6v12M534 506h12m-6-6v12"/>
+  </g>
+  <path d="M103 229 286 123 445 215 262 321Z" fill="#dce8d6"/>
+  <path d="m103 229 159 92v198l-159-92Z" fill="#214b37"/>
+  <path d="m262 321 183-106v57L310 350v141l-48 28Z" fill="#52765c"/>
+  <path d="m151 257 111 64v141l-111-64Z" fill="#F5F4EC"/>
+  <path d="m151 257 111 64v37l-111-64Z" fill="#b2c8ad"/>
+  <path d="m262 358 48-28v161l-48 28Z" fill="#315940"/>
+  <path d="m247 323 182-105 109 63-182 105Z" fill="#F89A70"/>
+  <path d="m356 386 182-105v112L356 499Z" fill="#f57141"/>
+  <path d="m247 323 109 63v113l-109-63v-55l61 35v-57l-61-35Z" fill="#C6552E"/>
+  <path d="m308 359 182-105 48 27-182 105Z" fill="#FBB894"/>
+  <path d="m356 444 134-77v-58l-134 77Z" fill="#F5F4EC"/>
+  <path d="m356 444 134-77v-30l-134 78Z" fill="#DDE8D7"/>
+  <path d="m490 309 48-28v112l-48-26Z" fill="#E96537"/>
+  <g stroke="#214b37" stroke-opacity=".35" stroke-width="1.1" stroke-linejoin="round">
+    <path d="m103 229 159 92 183-106M262 321v198m-111-262 111 64"/>
+  </g>
+  <g stroke="#873E24" stroke-opacity=".3" stroke-width="1.1" stroke-linejoin="round">
+    <path d="m247 323 109 63 182-105M356 386v113"/>
+  </g>
+  <g fill="#214b37">
+    <circle cx="286" cy="123" r="3"/>
+    <circle cx="103" cy="427" r="3"/>
+    <circle cx="538" cy="281" r="3"/>
+  </g>
+  <g stroke="#214b37" stroke-opacity=".5" stroke-width="1">
+    <path d="M286 123V72h48M103 427H64v27M538 281h43v-33"/>
+  </g>
+  <path d="M76 563h56m-56 0v-5m56 5v-5" stroke="#214b37" stroke-opacity=".45"/>
+  <circle cx="561" cy="550" r="14" stroke="#214b37" stroke-opacity=".35"/>
+  <path d="M552 550h18m-9-9v18" stroke="#214b37" stroke-opacity=".35"/>
+</svg>
